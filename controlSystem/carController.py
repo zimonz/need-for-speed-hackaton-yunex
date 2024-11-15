@@ -9,25 +9,28 @@ class CarController:
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect(f"tcp://localhost:{car_port}")
         self.carData = None
-        self.carCommand = None
+        self.carCommand = {
+            "GearSelection": "up",
+            "Throttle": 0.1,
+            "Brakes": 0,
+            "SteeringWheel": 0
+            # "Reset": False
+        }
     
-    def send_command(self, gear, throttle, brakes, steering):
+    def send_command(self, gear, throttle, brakes, steering, reset=False):
         self.carCommand = {
             "GearSelection": gear,
             "Throttle": throttle,
             "Brakes": brakes,
             "SteeringWheel": steering
+            # "Reset": reset
         }
         message = json.dumps(self.carCommand).encode()
         self.socket.send(message)
     
     def receive_data(self):
-        try:
-            self.socket.setsockopt(zmq.RCVTIMEO, 5000)
-            message = self.socket.recv()
-            self.carData = json.loads(message.decode())
-        except zmq.Again:
-            return
+        message = self.socket.recv()
+        self.carData = json.loads(message.decode())
 
     def compute_control(self, car_data):
         # Extract necessary car data
@@ -60,7 +63,7 @@ class CarController:
         return gear, throttle, brakes, steering
 
     def control_loop(self):
-        self.send_command("neutral", 0,0, 0)
+        self.send_command("up", 0.1 , 0 ,0, False)
         car_data = self.receive_data()
         while True:
             gear, throttle, brakes, steering = self.compute_control(car_data)
