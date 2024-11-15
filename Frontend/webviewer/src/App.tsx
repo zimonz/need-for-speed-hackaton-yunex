@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createUseStyles } from 'react-jss';
+import './App.css';
+import DataContextProvider from './contexts/DataContextProvider';
+import LiveView from './views/LiveView/LiveView';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const classes = useStyles();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <DataContextProvider>
+                <div className={classes.app}>
+                    <LiveView />
+                </div>
+            </DataContextProvider>
+        </>
+    );
 }
 
-export default App
+const useStyles = createUseStyles({
+    app: {
+        display: 'flex',
+        height: '100vh',
+        width: '100vw',
+    },
+});
+
+export default App;
