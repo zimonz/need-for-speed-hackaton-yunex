@@ -13,16 +13,21 @@ class CarController:
         self.socket.connect(f"tcp://localhost:{car_port}") #192.168.10.25
         self.carData = None
         self.carCommand = None
-        self.steeringPid =  PID(Kp=3.0, Ki=1, Kd=0.05, setpoint=0)
+        self.steeringPid =  PID(Kp=1.0, Ki=0.1, Kd=0.05, setpoint=0)
     
-    def send_command(self, gear, throttle, brakes, steering, reset):
-        self.carCommand = {
-            "Throttle": throttle,
-            "Brakes": brakes,
-            "SteeringWheel": steering
-        }
+    def send_command(self, gear=None, throttle=None, brakes=None, steering=None, reset=None):
+        self.carCommand = {}
         if gear in ["up", "down", "neutral"]:
             self.carCommand["GearSelection"] = gear
+            
+        if throttle is not None:
+            self.carCommand["Throttle"] = throttle
+        if brakes is not None:
+            self.carCommand["Brakes"] = brakes
+        if steering is not None:
+            self.carCommand["SteeringWheel"] = steering
+        if reset is not None:
+            self.carCommand["Reset"] = reset
         
         message = json.dumps(self.carCommand).encode()
         print(message)
@@ -78,7 +83,7 @@ class CarController:
             
         reset = "False"
         
-        return str(gear), int(throttle), int(brakes), int(steering), bool(reset)
+        return gear, throttle, brakes, steering, reset
 
     def control_loop(self):
         self.send_command("neutral", 0, 0, 0, "False")
@@ -92,4 +97,4 @@ class CarController:
 if __name__ == "__main__":
     # Start the controller for car on port 5555
     car_controller = CarController(car_port=5555)
-    car_controller.control_loop()
+    car_controller.send_command(reset="True")
