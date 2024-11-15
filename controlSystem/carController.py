@@ -13,7 +13,7 @@ class CarController:
         self.socket.connect(f"tcp://localhost:{car_port}") #192.168.10.25
         self.carData = None
         self.carCommand = None
-        self.steeringPid =  PID(Kp=3.0, Ki=1, Kd=0.05, setpoint=0)
+        self.steeringPid = PID(Kp=10, Ki=0.5, Kd=10, setpoint=0)
     
     def send_command(self, gear, throttle, brakes, steering, reset):
         self.carCommand = {
@@ -25,7 +25,6 @@ class CarController:
             self.carCommand["GearSelection"] = gear
         
         message = json.dumps(self.carCommand).encode()
-        print(message)
         self.socket.send(message)
     
     def receive_data(self):
@@ -50,7 +49,6 @@ class CarController:
         
         # Adjust steering
         steering = self.steeringPid(distance_from_center)
-        print("Distance from center:", distance_from_center, "Steering:", steering)
         
         # Adjust speed based on upcoming turns
         if abs(next_turn_angle) > 20:  # Sharp turn
@@ -78,12 +76,16 @@ class CarController:
             
         reset = "False"
         
-        return str(gear), int(throttle), int(brakes), int(steering), bool(reset)
+        gear = str(gear)
+        throttle = int(throttle)
+        brakes = int(brakes)
+        steering = int(steering)
+        print(gear, throttle, brakes, steering, reset)
+        return gear, throttle, brakes, steering, reset
 
     def control_loop(self):
         self.send_command("neutral", 0, 0, 0, "False")
         self.receive_data()
-        print(self.carData)
         while True:
             gear, throttle, brakes, steering, reset = self.compute_control()
             self.send_command(gear, throttle, brakes, steering, reset)
