@@ -14,17 +14,15 @@ class CarController:
         self.carData = None
         self.carCommand = None
         self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
-        self.speedPid = PID(Kp=10, Ki=0.01, Kd=0.1, setpoint=0)
+        self.speedPid = PID(Kp=10, Ki=0.01, Kd=0.1, setpoint=10)
         self.speedPid.output_limits = (-100, 100)
     
-    def send_command(self, gear, throttle, brakes, steering, reset):
+    def send_command(self, throttle, brakes, steering, reset):
         self.carCommand = {
             "Throttle": throttle,
             "Brakes": brakes,
             "SteeringWheel": steering
         }
-        if gear in ["up", "down", "neutral"]:
-            self.carCommand["GearSelection"] = gear
         
         message = json.dumps(self.carCommand).encode()
         self.socket.send(message)
@@ -55,37 +53,16 @@ class CarController:
         
         throttle, brakes = self.controlSpeed()
         # Adjust gear dynamically
-        current_gear = self.carData["CurrentGear"]
-        
-        if speed < 8 and current_gear != 1:  # 100 km/h in m/s
-            gear = "up" if current_gear < 1 else "down"
-        elif 8 <= speed < 15 and current_gear != 2:  # 200 km/h in m/s
-            gear = "up" if current_gear < 2 else "down"
-        elif 15 <= speed < 20 and current_gear != 3:  # 300 km/h in m/s
-            gear = "up" if current_gear < 3 else "down"
-        elif 20 <= speed < 30 and current_gear != 4:  # 400 km/h in m/s
-            gear = "up" if current_gear < 4 else "down"
-        elif speed >= 30 and current_gear != 5:  # 400+ km/h in m/s
-            gear = "up" if current_gear < 5 else "down"
-        else:
-            gear = "hold"
+    
             
         reset = "False"
         
-        gear = str(gear)
         throttle = int(throttle)
         brakes = int(brakes)
         steering = int(steering)
-        print(gear, throttle, brakes, steering, reset, speed)
-        return gear, throttle, brakes, steering, reset
+        # print(throttle, brakes, steering, reset, speed)
+        return throttle, brakes, steering, reset
 
-    def control_loop(self):
-        self.send_command("up", 0, 0, 0, "False")
-        self.receive_data()
-        while True:
-            gear, throttle, brakes, steering, reset = self.compute_control()
-            self.send_command(gear, throttle, brakes, steering, reset)
-            self.receive_data()
             
     def limitValue(self, value, min, max):
         if value < min:
@@ -103,17 +80,14 @@ class CarController:
         if intLookAhead < 1:
             intLookAhead = 1
             
-        maxDegree = 0
+        sumAngle = 0
         for i in range(0, intLookAhead):
             angle = self.carData["UpcomingTrackInfoFollowing"][str(intLookAhead*10)]
-            
-    
-            if maxDegree < abs(angle):
-                maxDegree = abs(angle)
+            sumAngle += angle
         
-        # Use the PID controller to adjust speed based on the degree of the curve
-        speed_adjustment = self.speedPid(abs(self.carData['TrackInfo']["DistanceToMiddle"])) * -10
-        print("                                ",speed_adjustment)
+        # Linear control for speed adjustment based on sumAngle
+        speed_adjustment = self.speedPid(self.carData["CurrentSpeed"])
+        
         if speed_adjustment > 0:
             throttle = speed_adjustment
             brakes = 0
@@ -123,11 +97,51 @@ class CarController:
         
         throttle = self.limitValue(throttle, 0, 100)
         brakes = self.limitValue(brakes, 0, 100)
+        print("sumAngle:", sumAngle, "Linear Result", speed_adjustment, "Throttle:", throttle, "Brakes:", brakes)
         return throttle, brakes
         
+    def gearShifter(self):
+        speed = self.carData["CurrentSpeed"]
+        current_gear = self.carData["CurrentGear"]
         
+        if not hasattr(self, 'gear_shift_counter'):
+            self.gear_shift_counter = 0
         
-
+        self.gear_shift_counter += 1
+        
+        if self.gear_shift_counter % 10 == 0:
+            if speed < 4:
+                desired_gear = 1
+            elif 4 <= speed < 8:
+                desired_gear = 2
+            elif 8 <= speed < 12:
+                desired_gear = 3
+            elif 12 <= speed < 30:
+                desired_gear = 4
+            elif speed >= 30:
+                desired_gear = 5
+            else:
+                desired_gear = current_gear
+            
+            print("Current Gear:", current_gear, "Desired Gear:", desired_gear)
+            desired_gear = 2
+            
+            while current_gear != desired_gear:
+                if current_gear < desired_gear:
+                    self.socket.send(b'{"GearSelection": "up"}')
+                elif current_gear > desired_gear:
+                    self.socket.send(b'{"GearSelection": "down"}')
+                self.receive_data()
+                current_gear = self.carData["CurrentGear"]
+            
+    def control_loop(self):
+        self.send_command( 0, 0, 0, "False")
+        self.receive_data()
+        while True:
+            throttle, brakes, steering, reset = self.compute_control()
+            self.gearShifter()
+            self.send_command(throttle, brakes, steering, reset)
+            self.receive_data()
         
 
 if __name__ == "__main__":
