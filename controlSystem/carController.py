@@ -23,7 +23,7 @@ class CarController:
     
     def receive_data(self):
         try:
-            self.socket.setsockopt(zmq.RCVTIMEO, 100)
+            self.socket.setsockopt(zmq.RCVTIMEO, 5000)
             message = self.socket.recv()
             self.carData = json.loads(message.decode())
         except zmq.Again:
