@@ -1,0 +1,9 @@
+'CurrentGear' = 0
+'CurrentBrakes' = 50000
+'CurrentThrottle' = 0
+'CurrentSteeringWheel' = 0
+'CurrentSpeed' = 2.81821412e-05
+'FastestLap' = 3.40282347e+38
+'TrackInfo' = {'DistanceToMiddle': -3.8855567, 'AngleToMiddle': -0.678108454, 'TrackDistance': 2005.2417, 'WorldPosition': {'X': 0.0, 'Y': 0.0, 'Z': 0.0}, 'WorldRotation': {'X': 0.0, 'Y': 0.0, 'Z': 0.0}}
+'CarInfo' = {'TireWear': 0.0, 'EngineTemp': 100.0, 'BrakeWear': 0.0, 'BrokenShifter': False, 'TireExploded': False}
+'UpcomingTrackInfoFollowing' = {'10': -0.3626169, '20': 0.198810175, '30': -0.8256681, '40': -3.68068, '50': -2.08093071, '60': 0.5834977, '70': 4.55883265, '80': 9.548328, '90': 36.8816261, '100': 1.98435783}
