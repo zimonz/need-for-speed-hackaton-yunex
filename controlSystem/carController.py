@@ -13,7 +13,9 @@ class CarController:
         self.socket.connect(f"tcp://localhost:{car_port}") #192.168.10.25
         self.carData = None
         self.carCommand = None
-        self.steeringPid = PID(Kp=10, Ki=0.5, Kd=10, setpoint=0)
+        self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
+        self.speedPid = PID(Kp=10, Ki=0.01, Kd=0.1, setpoint=0)
+        self.speedPid.output_limits = (-100, 100)
     
     def send_command(self, gear, throttle, brakes, steering, reset):
         self.carCommand = {
@@ -49,27 +51,21 @@ class CarController:
         
         # Adjust steering
         steering = self.steeringPid(distance_from_center)
+        steering = self.limitValue(steering, -100, 100)
         
-        # Adjust speed based on upcoming turns
-        if abs(next_turn_angle) > 20:  # Sharp turn
-            throttle = 50  # 50% throttle
-            brakes = 20  # 20% brakes
-        else:
-            throttle = 80  # 80% throttle
-            brakes = 0  # No brakes
-        
+        throttle, brakes = self.controlSpeed()
         # Adjust gear dynamically
         current_gear = self.carData["CurrentGear"]
         
-        if speed < 20 and current_gear != 1:
+        if speed < 8 and current_gear != 1:  # 100 km/h in m/s
             gear = "up" if current_gear < 1 else "down"
-        elif 20 <= speed < 40 and current_gear != 2:
+        elif 8 <= speed < 15 and current_gear != 2:  # 200 km/h in m/s
             gear = "up" if current_gear < 2 else "down"
-        elif 40 <= speed < 60 and current_gear != 3:
+        elif 15 <= speed < 20 and current_gear != 3:  # 300 km/h in m/s
             gear = "up" if current_gear < 3 else "down"
-        elif 60 <= speed < 80 and current_gear != 4:
+        elif 20 <= speed < 30 and current_gear != 4:  # 400 km/h in m/s
             gear = "up" if current_gear < 4 else "down"
-        elif speed >= 80 and current_gear != 5:
+        elif speed >= 30 and current_gear != 5:  # 400+ km/h in m/s
             gear = "up" if current_gear < 5 else "down"
         else:
             gear = "hold"
@@ -80,16 +76,59 @@ class CarController:
         throttle = int(throttle)
         brakes = int(brakes)
         steering = int(steering)
-        print(gear, throttle, brakes, steering, reset)
+        print(gear, throttle, brakes, steering, reset, speed)
         return gear, throttle, brakes, steering, reset
 
     def control_loop(self):
-        self.send_command("neutral", 0, 0, 0, "False")
+        self.send_command("up", 0, 0, 0, "False")
         self.receive_data()
         while True:
             gear, throttle, brakes, steering, reset = self.compute_control()
             self.send_command(gear, throttle, brakes, steering, reset)
             self.receive_data()
+            
+    def limitValue(self, value, min, max):
+        if value < min:
+            return min
+        elif value > max:
+            return max
+        else:
+            return value
+            
+    def controlSpeed(self):
+        # Extract necessary car data
+        intLookAhead = int(self.carData["CurrentSpeed"] / 100) + 1
+        if intLookAhead > 10:
+            intLookAhead = 10
+        if intLookAhead < 1:
+            intLookAhead = 1
+            
+        maxDegree = 0
+        for i in range(0, intLookAhead):
+            angle = self.carData["UpcomingTrackInfoFollowing"][str(intLookAhead*10)]
+            
+    
+            if maxDegree < abs(angle):
+                maxDegree = abs(angle)
+        
+        # Use the PID controller to adjust speed based on the degree of the curve
+        speed_adjustment = self.speedPid(abs(self.carData['TrackInfo']["DistanceToMiddle"])) * -10
+        print("                                ",speed_adjustment)
+        if speed_adjustment > 0:
+            throttle = speed_adjustment
+            brakes = 0
+        else:
+            throttle = 0
+            brakes = abs(speed_adjustment)
+        
+        throttle = self.limitValue(throttle, 0, 100)
+        brakes = self.limitValue(brakes, 0, 100)
+        return throttle, brakes
+        
+        
+        
+
+        
 
 if __name__ == "__main__":
     # Start the controller for car on port 5555
