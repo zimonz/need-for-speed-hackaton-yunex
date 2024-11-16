@@ -3,29 +3,31 @@ import { createUseStyles } from 'react-jss';
 
 interface TrackPositionChartProps {
     position: number;
+    rotation?: number;
 }
 
-const indicatorSize: number = 5;
+const indicatorSize: number = 8;
 const koefficient: number = 2;
 
 const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
     position,
+    rotation = 0,
 }) => {
     const classes = useStyles();
 
     return (
         <section className={classes.chart}>
-            <span>Track Position Chart</span>
-
             <div className={classes.chartArea}>
                 <span className={classes.yAxis}></span>
                 <span className={classes.xAxis}></span>
                 <span
                     className={classes.indicator}
                     style={{
-                        left: `calc(50% - ${position * koefficient * -1}% - ${
+                        left: `calc(50% + ${position * koefficient}% - ${
                             indicatorSize / 2
                         }vw)`,
+                        transition: 'all 0.5s ease',
+                        transform: `rotate(${rotation}deg)`,
                     }}
                 >
                     <span
@@ -33,7 +35,9 @@ const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
                             position: 'relative',
                             top: `${indicatorSize / 1.4}vw`,
                             color: 'white',
-                            fontSize: '1.1rem',
+                            fontSize: '1rem',
+                            transition: 'all 0.5s ease',
+                            transform: `rotate(-${rotation}deg)`,
                         }}
                     >
                         {position.toFixed(1)}m
@@ -55,7 +59,7 @@ const useStyles = createUseStyles({
         boxSizing: 'border-box',
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgb(220,220,220)',
+        backgroundColor: '#555',
     },
     chartArea: {
         display: 'flex',
@@ -66,24 +70,27 @@ const useStyles = createUseStyles({
         width: '100%',
     },
     yAxis: {
-        bottom: 10,
-        width: 1,
-        height: '100%',
-        backgroundColor: '#666',
+        position: 'absolute',
+        width: 10,
+        height: '80%',
+        left: 'calc(50% - 5px)',
+        background:
+            'repeating-linear-gradient(0deg,white 0px,white 15px,transparent 15px,transparent 30px)',
     },
     xAxis: {
-        bottom: 10,
-        width: '100%',
-        height: 1,
-        backgroundColor: '#000',
+        position: 'absolute',
+        width: '80%',
+        height: '80%',
+        borderLeft: '3px solid #999',
+        borderRight: '3px solid #999',
     },
     indicator: {
         position: 'absolute',
         width: 0,
         height: 0,
-        borderLeft: `${indicatorSize / 2}vw  solid transparent`,
-        borderRight: `${indicatorSize / 2}vw  solid transparent`,
-        borderBottom: `${indicatorSize}vw solid black`,
+        borderLeft: `${indicatorSize / 2.5}vw  solid transparent`,
+        borderRight: `${indicatorSize / 2.5}vw  solid transparent`,
+        borderBottom: `${indicatorSize}vw solid #aaa`,
         color: 'rgb(150,150,150)',
         margin: 0,
         left: 0,

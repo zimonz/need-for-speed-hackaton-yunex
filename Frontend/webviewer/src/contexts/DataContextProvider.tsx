@@ -8,6 +8,10 @@ export interface DataContextType {
     speed: number;
     gear: number;
     middlePosition: number;
+    rotation: number;
+    throttle: number;
+    breaks: number;
+    speedHistory: number[];
 }
 
 const SectorData = [
@@ -32,6 +36,8 @@ export const DataContext = createContext<DataContextType>(
     {} as DataContextType
 );
 
+export const MAX_HISTORY_LENGTH = 30;
+
 const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
@@ -40,20 +46,29 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     const [currentSector, setCurrentSector] = useState<number>(0);
     const [tireWear, setTireWear] = useState<number>(0);
     const [speed, setSpeed] = useState<number>(0);
+    const [speedHistory, setSpeedHistory] = useState<number[]>([]);
     const [gear, setGear] = useState<number>(0);
     const [middlePosition, setMiddlePosition] = useState<number>(0);
+    const [rotation, setRotation] = useState<number>(0);
+    const [throttle, setThrottle] = useState<number>(0);
+    const [breaks, setBreaks] = useState<number>(0);
 
     useEffect(() => {
         const updateData = () => {
             setEngineTemp(Math.random() * 100);
             setTrackposition(Math.random() * 100);
             setTireWear(Math.random() * 100);
+            setBreaks(Math.random() * 100);
+            setThrottle(Math.random() * 100);
             setSpeed(Math.random() * 200);
             setGear(Math.random() * 6);
-            setMiddlePosition(Math.random() * 5);
+            setMiddlePosition(
+                Math.random() * 15 * (Math.random() > 0.5 ? 1 : -1)
+            );
+            setRotation(Math.random() * 360);
         };
 
-        const intervalId = setInterval(updateData, 3000);
+        const intervalId = setInterval(updateData, 10000);
 
         return () => clearInterval(intervalId);
     }, []);
@@ -66,6 +81,16 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
         setCurrentSector(sector > 0 ? sector + 1 : 0);
     }, [trackPosition]);
 
+    useEffect(() => {
+        setSpeedHistory(prev => {
+            if (prev.length > MAX_HISTORY_LENGTH) {
+                prev.shift();
+            }
+
+            return [...prev, Math.round(speed)];
+        });
+    }, [speed]);
+
     return (
         <DataContext.Provider
             value={{
@@ -76,6 +101,10 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
                 speed,
                 gear,
                 middlePosition,
+                rotation,
+                throttle,
+                breaks,
+                speedHistory,
             }}
         >
             {children}

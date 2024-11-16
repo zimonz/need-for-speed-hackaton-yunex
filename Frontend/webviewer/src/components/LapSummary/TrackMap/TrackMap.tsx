@@ -33,7 +33,7 @@ const TrackMap: React.FC<TrackMapProps> = ({
         () => lapTimes.map(lapTime => lapTime.sector3),
         [lapTimes]
     );
-    console.log(sector1, sector2, sector3);
+
     const [fastestSector1, fastestSector2, fastestSector3] = useMemo(
         () => [
             Math.min(...sector1),

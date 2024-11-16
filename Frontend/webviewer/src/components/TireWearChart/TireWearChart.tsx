@@ -22,13 +22,15 @@ ChartJS.register(
 
 interface TireWearChartProps {
     title: string;
-    dataSet: number;
+    labels: string[];
+    dataSet: number | number[];
     max?: number;
     neutralThreshold?: number;
     criticalThreshold?: number;
 }
 
 const BarChart: React.FC<TireWearChartProps> = ({
+    labels,
     title = '',
     dataSet,
     max,
@@ -36,9 +38,9 @@ const BarChart: React.FC<TireWearChartProps> = ({
     criticalThreshold = 100,
 }) => {
     const classes = useStyles();
-    const [background, setBackground] = useState<string>(
-        'rgba(75, 192, 192, 0.2'
-    );
+    const [background, setBackground] = useState<string[]>([
+        'rgba(75, 192, 192, 0.2',
+    ]);
 
     const options = {
         responsive: true,
@@ -52,24 +54,31 @@ const BarChart: React.FC<TireWearChartProps> = ({
     };
 
     useEffect(() => {
-        if (dataSet >= criticalThreshold) {
-            setBackground('rgba(255, 99, 132, 0.8)');
-        } else if (dataSet >= neutralThreshold) {
-            setBackground('rgba(255, 206, 86, 0.5)');
-        } else {
-            setBackground('rgba(75, 192, 192, 0.2)');
-        }
+        const backgrounds: string[] = [];
+        const data = Array.isArray(dataSet) ? dataSet : [dataSet];
+
+        data.forEach(value => {
+            if (value >= criticalThreshold) {
+                backgrounds.push('rgba(255, 99, 132, 0.8)');
+            } else if (value >= neutralThreshold) {
+                backgrounds.push('rgba(255, 206, 86, 0.5)');
+            } else {
+                backgrounds.push('rgba(75, 192, 192, 0.2)');
+            }
+        });
+
+        setBackground(backgrounds);
     }, [dataSet, neutralThreshold, criticalThreshold]);
 
     return (
         <section className={classes.chart}>
             <Bar
                 data={{
-                    labels: [''],
+                    labels: labels,
                     datasets: [
                         {
                             label: title,
-                            data: [dataSet],
+                            data: Array.isArray(dataSet) ? dataSet : [dataSet],
                             backgroundColor: background,
                         },
                     ],

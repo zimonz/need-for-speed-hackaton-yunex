@@ -2,33 +2,60 @@ import React, { ReactNode, useContext, useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
 import BarChart from '../../components/TireWearChart/TireWearChart';
 import TrackPositionChart from '../../components/TrackPositionChart/TrackPositionChart';
-import SpeedTracker from '../../components/SpeedTracker/SpeedTracker';
 import { DataContext } from '../../contexts/DataContextProvider';
+import SpeedChart from '../../components/SpeedChart/SpeedChart';
 
 const LiveView: React.FC = () => {
     const classes = useStyles();
-    const { tireWear, engineTemp, middlePosition } = useContext(DataContext);
+    const {
+        tireWear,
+        engineTemp,
+        middlePosition,
+        rotation,
+        speed,
+        breaks,
+        throttle,
+    } = useContext(DataContext);
 
     const chartComponents = useMemo(
         (): ReactNode[] => [
             <BarChart
-                dataSet={engineTemp}
+                labels={[
+                    'Engine temperature',
+                    'Tire wear',
+                    'Throttle',
+                    'Breaks',
+                ]}
+                dataSet={[engineTemp, tireWear, throttle, breaks]}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={1}
-                title={'Engine temperature'}
+                title={''}
             />,
             <BarChart
-                dataSet={tireWear}
+                labels={['Speed']}
+                dataSet={speed}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={2}
-                title={'Tire wear'}
+                title={'Speed'}
             />,
-            <TrackPositionChart position={middlePosition} key={3} />,
-            <SpeedTracker key={4} />,
+            <TrackPositionChart
+                position={middlePosition}
+                rotation={rotation}
+                key={3}
+            />,
+            <SpeedChart key={4} />,
         ],
-        [tireWear, engineTemp, middlePosition]
+        [
+            engineTemp,
+            tireWear,
+            throttle,
+            breaks,
+            speed,
+            middlePosition,
+            rotation,
+        ]
     );
     return (
         <div
