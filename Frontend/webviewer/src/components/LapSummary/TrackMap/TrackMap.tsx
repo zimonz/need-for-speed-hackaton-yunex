@@ -1,14 +1,27 @@
 import Tooltip from '@mui/material/Tooltip';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 import { LapTime } from '../LapTimes/LapTimes';
 
 const TrackMap: React.FC<{ laptime: LapTime }> = ({ laptime }) => {
     const classes = useStyles();
     const [tooltipText, setTooltipText] = React.useState('');
+    const [sectorColors, setSectorColors] = React.useState({
+        sector1: 'lightgray',
+        sector2: 'lightgray',
+        sector3: 'lightgray',
+    });
+
+    useEffect(() => {
+        setSectorColors({
+            sector1: 'green',
+            sector2: 'purple',
+            sector3: 'yellow',
+        });
+    }, [laptime]);
 
     return (
-        <Tooltip title={tooltipText} followCursor style={{ background: 'red' }}>
+        <Tooltip title={tooltipText} followCursor>
             <svg
                 width="230mm"
                 height="120mm"
@@ -20,10 +33,10 @@ const TrackMap: React.FC<{ laptime: LapTime }> = ({ laptime }) => {
             >
                 <defs id="defs1" />
                 <path
-                    stroke="green"
+                    stroke={sectorColors.sector1}
                     strokeWidth={5}
                     strokeOpacity={1}
-                    fill="none"
+                    fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(`Sector 1: ${laptime.sector1}s`)
                     }
@@ -33,10 +46,10 @@ const TrackMap: React.FC<{ laptime: LapTime }> = ({ laptime }) => {
                     id="S1_Hackenheim"
                 />
                 <path
-                    stroke="yellow"
+                    stroke={sectorColors.sector3}
                     strokeWidth={5}
                     strokeOpacity={1}
-                    fill="none"
+                    fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(`Sector 3: ${laptime.sector3}s`)
                     }
@@ -46,10 +59,10 @@ const TrackMap: React.FC<{ laptime: LapTime }> = ({ laptime }) => {
                     id="S3_Hackenheim"
                 />
                 <path
-                    stroke="purple"
+                    stroke={sectorColors.sector2}
                     strokeWidth={5}
                     strokeOpacity={1}
-                    fill="none"
+                    fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(`Sector 2: ${laptime.sector2}s`)
                     }
@@ -83,6 +96,9 @@ const useStyles = createUseStyles({
         transition: 'transform 0.2s ease-in-out',
         transitionDelay: '0.1s',
         filter: 'drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4))',
+        '&:hover': {
+            filter: 'lighten(0.82)',
+        },
     },
 });
 

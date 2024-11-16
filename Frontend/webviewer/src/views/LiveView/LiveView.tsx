@@ -14,7 +14,7 @@ const LiveView: React.FC = () => {
                 dataSet={Math.random() * 100}
                 criticalThreshold={70}
                 neutralThreshold={50}
-                key={2}
+                key={1}
                 title={'Engine temperature'}
             />,
             <BarChart

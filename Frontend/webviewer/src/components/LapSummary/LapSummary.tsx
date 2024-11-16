@@ -7,10 +7,12 @@ const LapSummary: React.FC = () => {
     const classes = useStyles();
 
     const lapTimes: LapTime[] = [
-        { sector1: 30.0, sector2: 40.0, sector3: 50.0, total: 120.0 },
-        { sector1: 31.0, sector2: 41.0, sector3: 51.0, total: 123.0 },
-        { sector1: 32.0, sector2: 42.0, sector3: 52.0, total: 126.0 },
-    ]; // Define lapTimes variable
+        { sector1: 30, sector2: 25, sector3: 28, total: 83 },
+        { sector1: 32, sector2: 24, sector3: 27, total: 83 },
+        { sector1: 31, sector2: 26, sector3: 29, total: 86 },
+        { sector1: 29, sector2: 27, sector3: 26, total: 82 },
+        { sector1: 33, sector2: 28, sector3: 30, total: 91 },
+    ];
 
     return (
         <div className={classes.layout}>
