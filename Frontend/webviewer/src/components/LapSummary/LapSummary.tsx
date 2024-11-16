@@ -6,15 +6,7 @@ import { DataContext } from '../../contexts/DataContextProvider';
 
 const LapSummary: React.FC = () => {
     const classes = useStyles();
-    const { currentSector } = useContext(DataContext);
-
-    const lapTimes: LapTime[] = [
-        { sector1: 30, sector2: 25, sector3: 28, total: 83 },
-        { sector1: 32, sector2: 24, sector3: 27, total: 83 },
-        { sector1: 31, sector2: 26, sector3: 29, total: 86 },
-        { sector1: 29, sector2: 27, sector3: 26, total: 82 },
-        { sector1: 33, sector2: 28, sector3: 30, total: 91 },
-    ];
+    const { currentSector, laps: lapTimes } = useContext(DataContext);    
 
     const fastestTimes: LapTime = useMemo(() => {
         return {
@@ -47,6 +39,7 @@ const LapSummary: React.FC = () => {
                     lapTimes={lapTimes}
                     fastestTimes={fastestTimes}
                     slowestTimes={slowestTimes}
+
                 />
             </div>
         </div>

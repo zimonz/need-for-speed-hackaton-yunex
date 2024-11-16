@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import LapSummary from '../../components/LapSummary/LapSummary';
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
 
 const AnalysisView: React.FC = () => {
     const classes = useStyles();
@@ -8,6 +9,7 @@ const AnalysisView: React.FC = () => {
     return (
         <div className={classes.layout}>
             <LapSummary />
+            <ProgressBar />
         </div>
     );
 };

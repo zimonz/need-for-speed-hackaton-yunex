@@ -8,6 +8,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    ChartOptions,
 } from 'chart.js';
 import { createUseStyles } from 'react-jss';
 
@@ -42,9 +43,13 @@ const BarChart: React.FC<TireWearChartProps> = ({
         'rgba(75, 192, 192, 0.2',
     ]);
 
-    const options = {
+    const options: ChartOptions<'bar'> = {
         responsive: true,
-        plugins: {},
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
         scales: {
             y: {
                 beginAtZero: true,

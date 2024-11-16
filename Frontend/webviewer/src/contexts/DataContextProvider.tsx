@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import WebSocket from 'isomorphic-ws';
+import { LapTime } from '../components/LapSummary/LapTimes/LapTimes';
 
 export interface DataContextType {
     engineTemp: number;
@@ -14,23 +15,28 @@ export interface DataContextType {
     brakes: number;
     speedHistory: number[];
     steeringWheelPosition: number;
+    brokenShifter: boolean;
+    tireExploded: boolean;
+    lastLap: number;
+    laps: LapTime[];
+    carFailure: boolean;
 }
 
-const SectorData = [
+export const SectorData = [
     {
         sector: 1,
         start: 0,
-        end: 33,
+        end: 525,
     },
     {
         sector: 2,
-        start: 34,
-        end: 66,
+        start: 526,
+        end: 1350,
     },
     {
         sector: 3,
-        start: 67,
-        end: 100,
+        start: 1351,
+        end: 2100,
     },
 ];
 
@@ -38,13 +44,56 @@ export const DataContext = createContext<DataContextType>(
     {} as DataContextType
 );
 
-export const MAX_HISTORY_LENGTH = 30;
+interface WorldPosition {
+    X: number;
+    Y: number;
+    Z: number;
+}
+
+interface WorldRotation {
+    X: number;
+    Y: number;
+    Z: number;
+}
+
+interface TrackInfo {
+    DistanceToMiddle: number;
+    AngleToMiddle: number;
+    TrackDistance: number;
+    WorldPosition: WorldPosition;
+    WorldRotation: WorldRotation;
+}
+
+interface CarInfo {
+    TireWear: number;
+    EngineTemp: number;
+    BrakeWear: number;
+    BrokenShifter: boolean;
+    TireExploded: boolean;
+}
+
+interface ResponseData {
+    CurrentGear: number;
+    CurrentBrakes: number;
+    CurrentThrottle: number;
+    CurrentSteeringWheel: number;
+    CurrentSpeed: number;
+    FastestLap: number;
+    LastLap: number;
+    TrackInfo: TrackInfo;
+    CarInfo: CarInfo;
+    UpcomingTrackInfoFollowing: { [key: string]: number };
+    Laps?: LapTime[];
+}
+
+export const MAX_HISTORY_LENGTH = 100;
 
 const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
+    const [response, setResponse] = useState<ResponseData>({} as ResponseData);
     const [engineTemp, setEngineTemp] = useState<number>(0);
-    const [trackPosition, setTrackposition] = useState<number>(0);
+    const [trackPosition, setTrackPosition] = useState<number>(0);
     const [currentSector, setCurrentSector] = useState<number>(0);
     const [tireWear, setTireWear] = useState<number>(0);
     const [speed, setSpeed] = useState<number>(0);
@@ -54,48 +103,79 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     const [rotation, setRotation] = useState<number>(0);
     const [throttle, setThrottle] = useState<number>(0);
     const [brakes, setBrakes] = useState<number>(0);
+    const [tireExploded, setTireExploded] = useState<boolean>(false);
+    const [brokenShifter, setBrokenShifter] = useState<boolean>(false);
+    const [carFailure, setCarFailure] = useState<boolean>(false);
     const [steeringWheelPosition, setSteeringWheelPosition] =
         useState<number>(0);
+    const [lastLap, setLastLap] = useState<number>(0);
+    const [laps, setLaps] = useState<LapTime[]>([
+        { sector1: 0, sector2: 0, sector3: 0, total: 0 },
+    ]);
 
     useEffect(() => {
-        const ws: WebSocket = new WebSocket('ws://localhost:5000/ws');
-
+        const ws = new WebSocket('ws://localhost:5000/ws');
         ws.onopen = () => console.log('WebSocket connected');
         ws.onclose = () => console.log('WebSocket disconnected');
-        ws.onmessage = (data: unknown) =>
-            console.log(
-                'WebSocket message received',
-                JSON.parse(data as string)
-            );
 
-        const updateData = () => {
-            setEngineTemp(Math.random() * 100);
-            setTrackposition(Math.random() * 100);
-            setTireWear(Math.random() * 100);
-            setBrakes(Math.random() * 100);
-            setThrottle(Math.random() * 100);
-            setSteeringWheelPosition(
-                Math.round(Math.random() * 100) * (Math.random() > 0.5 ? 1 : -1)
-            );
-            setSpeed(Math.random() * 200);
-            setGear(Math.random() * 6);
-            setMiddlePosition(
-                Math.random() * 15 * (Math.random() > 0.5 ? 1 : -1)
-            );
-            setRotation(Math.random() * 360);
-        };
-
-        const intervalId = setInterval(updateData, 3000);
-
-        return () => clearInterval(intervalId);
+        ws.onmessage = (data: MessageEvent) =>
+            setResponse(JSON.parse(data.data) as ResponseData);
     }, []);
 
     useEffect(() => {
-        const sector = SectorData.findIndex(
-            sector =>
-                trackPosition >= sector.start && trackPosition <= sector.end
-        );
-        setCurrentSector(sector > 0 ? sector + 1 : 0);
+        if (Object.keys(response).length == 0) return;
+
+        console.log(response);
+
+        setEngineTemp(response.CarInfo.EngineTemp);
+        setTrackPosition(response.TrackInfo.TrackDistance);
+        setTireWear(response.CarInfo.TireWear);
+        setBrakes(response.CurrentBrakes);
+        setThrottle(response.CurrentThrottle);
+        setSteeringWheelPosition(response.CurrentSteeringWheel);
+        setSpeed(response.CurrentSpeed * 3.6);
+        setGear(response.CurrentGear);
+        setMiddlePosition(response.TrackInfo.DistanceToMiddle);
+        setRotation(response.TrackInfo.AngleToMiddle);
+        setBrokenShifter(response.CarInfo.BrokenShifter);
+        setTireExploded(response.CarInfo.TireExploded);
+        setLastLap(response.LastLap);
+    }, [response]);
+
+    useEffect(
+        () =>
+            setLaps(prev => {
+                if (
+                    !Object.keys(prev[prev.length - 1]).includes('total') ||
+                    lastLap <= 0 ||
+                    lastLap == prev[prev.length - 1].total
+                )
+                    return prev;
+
+                return [
+                    ...prev,
+                    {
+                        sector1: 0,
+                        sector2: 0,
+                        sector3: 0,
+                        total: lastLap,
+                    },
+                ];
+            }),
+        [lastLap, trackPosition]
+    );
+
+    useEffect(() => {
+        setCarFailure(tireExploded || brokenShifter);
+    }, [tireExploded, brokenShifter]);
+
+    useEffect(() => {
+        const sector =
+            SectorData.find(
+                sector =>
+                    trackPosition >= sector.start && trackPosition <= sector.end
+            )?.sector || 0;
+        setCurrentSector(sector);
     }, [trackPosition]);
 
     useEffect(() => {
@@ -121,8 +201,13 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
                 middlePosition,
                 rotation,
                 throttle,
-                brakes: brakes,
+                brakes,
                 speedHistory,
+                brokenShifter,
+                tireExploded,
+                lastLap,
+                carFailure,
+                laps,
             }}
         >
             {children}

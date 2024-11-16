@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+import { DataContext } from '../../contexts/DataContextProvider';
 
 interface TrackPositionChartProps {
     position: number;
@@ -7,12 +8,13 @@ interface TrackPositionChartProps {
 }
 
 const indicatorSize: number = 8;
-const koefficient: number = 2;
+const koefficient: number = 3;
 
 const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
     position,
     rotation = 0,
 }) => {
+    const {carFailure} = useContext(DataContext);
     const classes = useStyles();
 
     return (
@@ -24,10 +26,11 @@ const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
                     className={classes.indicator}
                     style={{
                         left: `calc(50% + ${position * koefficient}% - ${
-                            indicatorSize / 2
+                            indicatorSize / 2.5
                         }vw)`,
                         transition: 'all 0.5s ease',
                         transform: `rotate(${rotation}deg)`,
+                        borderBottom: `${indicatorSize}vw solid ${carFailure ? 'tomato' : 'rgb(50, 200, 50)'}`,
                     }}
                 >
                     <span
@@ -90,7 +93,6 @@ const useStyles = createUseStyles({
         height: 0,
         borderLeft: `${indicatorSize / 2.5}vw  solid transparent`,
         borderRight: `${indicatorSize / 2.5}vw  solid transparent`,
-        borderBottom: `${indicatorSize}vw solid #aaa`,
         color: 'rgb(150,150,150)',
         margin: 0,
         left: 0,

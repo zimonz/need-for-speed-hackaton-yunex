@@ -32,7 +32,7 @@ const SpeedChart: React.FC = () => {
     const data: ChartData<'line'> = useMemo(
         () => ({
             labels: speedHistory.map(
-                (_, index) => `${speedHistory.length - index - 1}s`
+                (_, index) => `${speedHistory.length - index - 1}`
             ),
             datasets: [
                 {
@@ -49,6 +49,10 @@ const SpeedChart: React.FC = () => {
 
     const options: ChartOptions<'line'> = {
         responsive: true,
+        animation: {
+            easing: 'linear',
+            duration: 0
+        },
         plugins: {
             legend: {
                 position: 'top',
@@ -59,6 +63,18 @@ const SpeedChart: React.FC = () => {
                 text: 'Speed',
             },
         },
+        elements: {
+            point:{
+                radius: 0
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                min: 0,
+                suggestedMax: 250
+            }
+        }
     };
 
     return (

@@ -70,7 +70,9 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(
-                            `Sector 1: ${laptime.sector1}s -> Fastest Time: ${fastestSector1}s`
+                            `Sector 1: ${
+                                laptime.sector1 || 'no time'
+                            }s -> Fastest Time: ${fastestSector1}s`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}
@@ -89,7 +91,9 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(
-                            `Sector 3: ${laptime.sector3}s -> Fastest Time: ${fastestSector3}s`
+                            `Sector 3: ${
+                                laptime.sector3 || 'no time'
+                            }s -> Fastest Time: ${fastestSector3}s`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}
@@ -108,7 +112,9 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     fill="transparent"
                     onMouseEnter={() =>
                         setTooltipText(
-                            `Sector 2: ${laptime.sector2}s -> Fastest Time: ${fastestSector2}s`
+                            `Sector 2: ${
+                                laptime.sector2 || 'no time'
+                            }s -> Fastest Time: ${fastestSector2}s`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}
@@ -151,8 +157,8 @@ const useStyles = createUseStyles({
         },
     },
     activeSector: {
-        '-webkit-animation': 'blink 1s ease-in-out infinite alternate',
-        animation: 'blink 1s ease-in-out infinite alternate',
+        '-webkit-animation': 'blink 0.5s ease-in-out infinite alternate',
+        animation: 'blink 0.5s ease-in-out infinite alternate',
     },
 });
 

@@ -1,13 +1,14 @@
-import React from 'react';
-import SteeringWheelSvg from '../../assets/Formula_one_steering_wheel_front.svg?react';
+import React, { useContext } from 'react';
+// import SteeringWheelSvg from '../../assets/Formula_one_steering_wheel_front.svg?react';
 import { createUseStyles } from 'react-jss';
+import SteeringWheelSvg from './SteeringWheelSvg';
+import { DataContext } from '../../contexts/DataContextProvider';
 
 const SteeringWheel: React.FC<{
     steeringWheelPosition: number;
 }> = ({ steeringWheelPosition }) => {
     const classes = useStyles();
-
-    console.log(steeringWheelPosition);
+    const { gear, speed } = useContext(DataContext);
 
     return (
         <section className={classes.chart}>
@@ -22,7 +23,13 @@ const SteeringWheel: React.FC<{
                     transition: 'all 0.5s ease',
                 }}
             >
-                <SteeringWheelSvg width={'50%'} height={'50%'} />
+                <SteeringWheelSvg
+                    height={'60%'}
+                    width={'60%'}
+                    gear={gear}
+                    speed={speed.toFixed(0)}
+                />
+                {/* <SteeringWheelSvg width={'50%'} height={'50%'} /> */}
             </div>
         </section>
     );

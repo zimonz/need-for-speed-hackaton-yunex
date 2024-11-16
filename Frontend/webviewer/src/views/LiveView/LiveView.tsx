@@ -21,13 +21,8 @@ const LiveView: React.FC = () => {
     const chartComponents = useMemo(
         (): ReactNode[] => [
             <BarChart
-                labels={[
-                    'Engine temperature',
-                    'Tire wear',
-                    'Throttle',
-                    'Brakes',
-                ]}
-                dataSet={[engineTemp, tireWear, throttle, brakes]}
+                labels={['Tire wear', 'Throttle', 'Brakes']}
+                dataSet={[tireWear, throttle, brakes]}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={1}
