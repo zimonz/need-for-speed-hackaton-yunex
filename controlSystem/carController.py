@@ -6,6 +6,14 @@ import keyboard
 from simple_pid import PID
 import helper
 
+class ManualControls:
+    def __init__(self):
+        self.throttle = 0
+        self.brakes = 0
+        self.steering = 0
+        self.reset = False
+        self.gear = 0
+
 class CarController:
     def __init__(self, car_port):
         # ZeroMQ setup
@@ -23,7 +31,9 @@ class CarController:
         self.command["SteeringWheel"] = 0
         self.command["Gear"] = 0
         self.logFile = open("log.csv", "w")
-        self.logFile.write("Timestamp,Speed,DistanceFromCenter,TrackAngle,TrackDistance,WorldPosition,WorldRotation,Throttle,Brakes,Steering,Gear\n")
+        self.logFile.write("Timestamp;Speed;DistanceFromCenter;TrackAngle;TrackDistance;WorldPosition;WorldRotation;Throttle;Brakes;Steering;Gear\n")
+        self.manualControls = ManualControls()
+        
     
     def send_command(self, throttle, brakes, steering, reset):
         self.carCommand = {
@@ -61,7 +71,6 @@ class CarController:
         
         throttle, brakes = self.controlSpeed()
         # Adjust gear dynamically
-    
             
         reset = "False"
         
@@ -86,10 +95,17 @@ class CarController:
     def controlSpeed(self):
         #get the current TrackDistance and read the value from the setPointData, use Throttle and Brakes from the setPointData
         currentTrackDistance = self.carData["TrackInfo"]["TrackDistance"]
+        
+        scalingFactorAccelerate = 0.9
+        scalingFactorBrake = 1.0
+        
         intCurrentTrackDistance = int(float(currentTrackDistance))
-        setPoint = self.setPointData[intCurrentTrackDistance]
-        throttle = setPoint["Throttle"]
-        brakes = setPoint["Brakes"]
+        try:
+            setPoint = self.setPointData[intCurrentTrackDistance]
+        except KeyError:
+            setPoint = self.setPointData[intCurrentTrackDistance - 1]
+        throttle = int(setPoint["Throttle"])*scalingFactorAccelerate
+        brakes = int(setPoint["Brakes"])*(1-scalingFactorBrake)
         print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]))
         return throttle, brakes
         
@@ -99,10 +115,10 @@ class CarController:
 
         shift_mapping = [ 
                          (0, 9), 
-                         (1, 16), 
-                         (14, 24), #gear 3
-                         (20, 40), #gear 4
-                         (30, 50), 
+                         (2, 16), 
+                         (10, 24), #gear 3
+                         (20, 35), #gear 4
+                         (27, 50), 
                          (80, np.inf) 
                          ]
         
@@ -155,12 +171,40 @@ class CarController:
             self.socket.send(b'{"Reset": "True"}')
             self.receive_data()
 
+    def controlWithWSAD(self):
+        if keyboard.is_pressed('w'):
+            self.manualControls.throttle = 100
+            self.manualControls.brakes = 0
+        elif keyboard.is_pressed('s'):
+            self.manualControls.brakes = 100
+            self.manualControls.throttle = 0
+        else:
+            self.manualControls.throttle = 0
+            self.manualControls.brakes = 0
+        if keyboard.is_pressed('a'):
+            self.manualControls.steering -= 5
+        elif keyboard.is_pressed('d'):
+            self.manualControls.steering += 5
+        else:
+            self.manualControls.steering = 0
+        if keyboard.is_pressed('r'):
+            self.manualControls.reset = True
+        else:
+            self.manualControls.reset = False
+            
+        return self.manualControls.throttle, self.manualControls.brakes, self.manualControls.steering, self.manualControls.reset
+        
+
+
             
     def control_loop(self):
         self.send_command( 0, 0, 0, "False")
         self.receive_data()
+        self.socket.send(b'{"Reset": "True"}')
+        self.receive_data()
         self.setPointData = helper.readCSVLogFile("workFile.csv")
         while True:
+            # throttle, brakes, steering, reset = self.controlWithWSAD()
             throttle, brakes, steering, reset = self.compute_control()
             self.gearShifter()
             self.send_command(throttle, brakes, steering, reset)
