@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
 import BarChart from '../../components/TireWearChart/TireWearChart';
 import TrackPositionChart from '../../components/TrackPositionChart/TrackPositionChart';
 import SpeedTracker from '../../components/SpeedTracker/SpeedTracker';
+import { DataContext } from '../../contexts/DataContextProvider';
 
 const LiveView: React.FC = () => {
     const classes = useStyles();
-    const [charts, setCharts] = useState<React.ReactNode[]>([]);
+    const { tireWear, engineTemp, middlePosition } = useContext(DataContext);
 
-    useEffect(() => {
-        setCharts([
+    const chartComponents = useMemo(
+        (): ReactNode[] => [
             <BarChart
-                dataSet={Math.random() * 100}
+                dataSet={engineTemp}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={1}
                 title={'Engine temperature'}
             />,
             <BarChart
-                dataSet={Math.random() * 100}
+                dataSet={tireWear}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={2}
                 title={'Tire wear'}
             />,
-            <TrackPositionChart position={1} key={3} />,
+            <TrackPositionChart position={middlePosition} key={3} />,
             <SpeedTracker key={4} />,
-        ]);
-    }, []);
+        ],
+        [tireWear, engineTemp, middlePosition]
+    );
     return (
         <div
             style={{
@@ -38,7 +40,9 @@ const LiveView: React.FC = () => {
                 height: '100%',
             }}
         >
-            <div className={classes.layout}>{charts.map(value => value)}</div>
+            <div className={classes.layout}>
+                {chartComponents.map(value => value)}
+            </div>
         </div>
     );
 };

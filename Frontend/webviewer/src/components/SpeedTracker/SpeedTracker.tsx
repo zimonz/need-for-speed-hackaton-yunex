@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+import { DataContext } from '../../contexts/DataContextProvider';
 
 const SpeedTracker: React.FC = () => {
-    const [speed, setSpeed] = useState<number>(0);
     const classes = useStyles();
-
-    useEffect(() => {
-        setSpeed(Math.random() * 100);
-    }, []);
+    const { speed, gear } = useContext(DataContext);
 
     return (
         <section
             style={{
-                backgroundColor: 'lightblue',
+                backgroundColor: 'rgb(200,200,200)',
             }}
         >
             <div
@@ -26,7 +23,7 @@ const SpeedTracker: React.FC = () => {
                 }}
             >
                 <h1 className={classes.indicator}>{speed.toFixed(2)} km/h</h1>
-                <h1 className={classes.indicator}>{speed.toFixed(0)}. Gear</h1>
+                <h1 className={classes.indicator}>Gear {gear.toFixed(0)}</h1>
             </div>
         </section>
     );

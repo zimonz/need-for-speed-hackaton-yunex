@@ -26,6 +26,7 @@ function App() {
 const useStyles = createUseStyles({
     app: {
         display: 'block',
+        minWidth: '1300px',
         width: '100vw',
         backgroundColor: '#efefef',
     },
@@ -45,6 +46,7 @@ const useStyles = createUseStyles({
         width: '100%',
         height: 50,
         left: 0,
+        bottom: 0,
     },
 });
 
