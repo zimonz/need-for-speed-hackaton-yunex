@@ -4,6 +4,7 @@ import numpy as np
 import time
 import keyboard
 from simple_pid import PID
+import helper
 
 class CarController:
     def __init__(self, car_port):
@@ -13,8 +14,8 @@ class CarController:
         self.socket.connect(f"tcp://localhost:{car_port}") #192.168.10.25
         self.carData = None
         self.carCommand = None
-        self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
-        self.speedPid = PID(Kp=0.01, Ki=0.5, Kd=0.1, setpoint=30)
+        self.steeringPid = PID(Kp=10, Ki=0.5, Kd=30, setpoint=0)
+        self.speedPid = PID(Kp=0.01, Ki=0.05, Kd=0.1, setpoint=20)
         self.speedPid.output_limits = (-100, 100)
         self.command = {}
         self.command["Throttle"] = 0
@@ -83,31 +84,12 @@ class CarController:
             return value
             
     def controlSpeed(self):
-        # Extract necessary car data
-        intLookAhead = int(self.carData["CurrentSpeed"] / 100) + 1
-        if intLookAhead > 10:
-            intLookAhead = 10
-        if intLookAhead < 1:
-            intLookAhead = 1
-            
-        sumAngle = 0
-        for i in range(0, intLookAhead):
-            angle = self.carData["UpcomingTrackInfoFollowing"][str(intLookAhead*10)]
-            sumAngle += angle
-        
-        # Linear control for speed adjustment based on sumAngle
-        speed_adjustment = self.speedPid(self.carData["CurrentSpeed"])
-        
-        if speed_adjustment > 0:
-            throttle = speed_adjustment
-            brakes = 0
-        else:
-            throttle = 0
-            brakes = abs(speed_adjustment)
-        
-        throttle = self.limitValue(throttle, 0, 100)
-        brakes = self.limitValue(brakes, 0, 100)
-        # print("sumAngle:", sumAngle, "Linear Result", speed_adjustment, "Throttle:", throttle, "Brakes:", brakes)
+        #get the current TrackDistance and read the value from the setPointData, use Throttle and Brakes from the setPointData
+        currentTrackDistance = self.carData["TrackInfo"]["TrackDistance"]
+        intCurrentTrackDistance = int(float(currentTrackDistance))
+        setPoint = self.setPointData[intCurrentTrackDistance]
+        throttle = setPoint["Throttle"]
+        brakes = setPoint["Brakes"]
         return throttle, brakes
         
     def gearShifter(self):
@@ -153,7 +135,7 @@ class CarController:
                     self.socket.send(b'{"GearSelection": "down"}')
                 self.receive_data()
                 current_gear = self.carData["CurrentGear"]
-            print("Current Gear:", current_gear, "Desired Gear:", desired_gear, "Speed:", int(speed), "Throttle:", int(self.carCommand["Throttle"]))
+            # print("Current Gear:", current_gear, "Desired Gear:", desired_gear, "Speed:", int(speed), "Throttle:", int(self.carCommand["Throttle"]), "Brakes:", int(self.carCommand["Brakes"]))
     
     def recordRunToFile(self):
         # Extract necessary car data
@@ -168,7 +150,7 @@ class CarController:
         steering = self.carCommand["SteeringWheel"]
         gear = self.carData["CurrentGear"]
         #log to csv file
-        self.logFile.write(f"{time.time()},{speed},{distance_from_center},{track_angle},{track_distance},{world_position},{world_rotation},{throttle},{brakes},{steering},{gear}\n")
+        self.logFile.write(f"{time.time()};{speed};{distance_from_center};{track_angle};{track_distance};{world_position};{world_rotation};{throttle};{brakes};{steering};{gear}\n")
         
     def checkForExit(self):
         if keyboard.is_pressed('esc'):
@@ -185,6 +167,7 @@ class CarController:
     def control_loop(self):
         self.send_command( 0, 0, 0, "False")
         self.receive_data()
+        self.setPointData = helper.readCSVLogFile("log copy.csv")
         while True:
             throttle, brakes, steering, reset = self.compute_control()
             self.gearShifter()
