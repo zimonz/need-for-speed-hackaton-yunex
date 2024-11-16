@@ -16,6 +16,12 @@ class CarController:
         self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
         self.speedPid = PID(Kp=10, Ki=0.01, Kd=0.1, setpoint=10)
         self.speedPid.output_limits = (-100, 100)
+        self.command = {}
+        self.command["Throttle"] = 0
+        self.command["Brakes"] = 0
+        self.command["SteeringWheel"] = 0
+        self.command["Gear"] = 0
+        self.logFile = open("log.csv", "w")
     
     def send_command(self, throttle, brakes, steering, reset):
         self.carCommand = {
@@ -58,8 +64,11 @@ class CarController:
         reset = "False"
         
         throttle = int(throttle)
+        self.command["Throttle"] = throttle
         brakes = int(brakes)
+        self.command["Brakes"] = brakes
         steering = int(steering)
+        self.command["SteeringWheel"] = steering
         # print(throttle, brakes, steering, reset, speed)
         return throttle, brakes, steering, reset
 
@@ -133,6 +142,33 @@ class CarController:
                     self.socket.send(b'{"GearSelection": "down"}')
                 self.receive_data()
                 current_gear = self.carData["CurrentGear"]
+    
+    def recordRunToFile(self):
+        # Extract necessary car data
+        speed = self.carData["CurrentSpeed"]
+        distance_from_center = self.carData['TrackInfo']["DistanceToMiddle"]
+        track_angle = self.carData["TrackInfo"]["AngleToMiddle"]
+        track_distance = self.carData["TrackInfo"]["TrackDistance"]
+        world_position = self.carData["WorldPosition"]
+        world_rotation = self.carData["WorldRotation"]
+        throttle = self.carCommand["Throttle"]
+        brakes = self.carCommand["Brakes"]
+        steering = self.carCommand["SteeringWheel"]
+        gear = self.carData["CurrentGear"]
+        #log to csv file
+        self.logFile.write(f"{time.time()},{speed},{distance_from_center},{track_angle},{track_distance},{world_position},{world_rotation},{throttle},{brakes},{steering},{gear}\n")
+        
+    def checkForExit(self):
+        if keyboard.is_pressed('esc'):
+            self.logFile.close()
+            return True
+        return False
+    
+    def checkForReset(self):
+          if keyboard.is_pressed('space'):
+            self.socket.send(b'{"Reset": "True"}')
+            self.receive_data()
+
             
     def control_loop(self):
         self.send_command( 0, 0, 0, "False")
@@ -142,6 +178,9 @@ class CarController:
             self.gearShifter()
             self.send_command(throttle, brakes, steering, reset)
             self.receive_data()
+            self.checkForReset()
+            if self.checkForExit():
+                break
         
 
 if __name__ == "__main__":
