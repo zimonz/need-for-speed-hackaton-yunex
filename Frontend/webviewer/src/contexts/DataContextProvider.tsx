@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import WebSocket from 'isomorphic-ws';
 
 export interface DataContextType {
     engineTemp: number;
@@ -10,8 +11,9 @@ export interface DataContextType {
     middlePosition: number;
     rotation: number;
     throttle: number;
-    breaks: number;
+    brakes: number;
     speedHistory: number[];
+    steeringWheelPosition: number;
 }
 
 const SectorData = [
@@ -51,15 +53,30 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     const [middlePosition, setMiddlePosition] = useState<number>(0);
     const [rotation, setRotation] = useState<number>(0);
     const [throttle, setThrottle] = useState<number>(0);
-    const [breaks, setBreaks] = useState<number>(0);
+    const [brakes, setBrakes] = useState<number>(0);
+    const [steeringWheelPosition, setSteeringWheelPosition] =
+        useState<number>(0);
 
     useEffect(() => {
+        const ws: WebSocket = new WebSocket('ws://localhost:5000/ws');
+
+        ws.onopen = () => console.log('WebSocket connected');
+        ws.onclose = () => console.log('WebSocket disconnected');
+        ws.onmessage = (data: unknown) =>
+            console.log(
+                'WebSocket message received',
+                JSON.parse(data as string)
+            );
+
         const updateData = () => {
             setEngineTemp(Math.random() * 100);
             setTrackposition(Math.random() * 100);
             setTireWear(Math.random() * 100);
-            setBreaks(Math.random() * 100);
+            setBrakes(Math.random() * 100);
             setThrottle(Math.random() * 100);
+            setSteeringWheelPosition(
+                Math.round(Math.random() * 100) * (Math.random() > 0.5 ? 1 : -1)
+            );
             setSpeed(Math.random() * 200);
             setGear(Math.random() * 6);
             setMiddlePosition(
@@ -68,7 +85,7 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
             setRotation(Math.random() * 360);
         };
 
-        const intervalId = setInterval(updateData, 10000);
+        const intervalId = setInterval(updateData, 3000);
 
         return () => clearInterval(intervalId);
     }, []);
@@ -96,6 +113,7 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
             value={{
                 engineTemp,
                 trackPosition,
+                steeringWheelPosition,
                 currentSector,
                 tireWear,
                 speed,
@@ -103,7 +121,7 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
                 middlePosition,
                 rotation,
                 throttle,
-                breaks,
+                brakes: brakes,
                 speedHistory,
             }}
         >

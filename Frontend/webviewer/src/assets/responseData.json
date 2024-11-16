@@ -1,0 +1,35 @@
+{
+    "CurrentGear": 2,
+    "CurrentBrakes": 0,
+    "CurrentThrottle": 80,
+    "CurrentSteeringWheel": 1,
+    "CurrentSpeed": 0.4164156,
+    "FastestLap": 113.484543,
+    "LastLap": 113.484543,
+    "TrackInfo": {
+        "DistanceToMiddle": -33.18336,
+        "AngleToMiddle": -71.67279,
+        "TrackDistance": 130.827057,
+        "WorldPosition": { "X": 138.923187, "Y": 0.79749167, "Z": -21.99086 },
+        "WorldRotation": { "X": 359.667938, "Y": -15.1040878, "Z": 0.809014142 }
+    },
+    "CarInfo": {
+        "TireWear": 0.857029,
+        "EngineTemp": 2511.41528,
+        "BrakeWear": 0.0,
+        "BrokenShifter": false,
+        "TireExploded": false
+    },
+    "UpcomingTrackInfoFollowing": {
+        "10": 5.75472736,
+        "20": 3.04368973,
+        "30": 1.52828717,
+        "40": 2.70124626,
+        "50": 1.1436367,
+        "60": 0.303902447,
+        "70": 0.67318505,
+        "80": 0.06852804,
+        "90": 0.06852804,
+        "100": -0.09691329
+    }
+}

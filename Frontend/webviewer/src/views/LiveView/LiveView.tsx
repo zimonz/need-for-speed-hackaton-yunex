@@ -4,6 +4,7 @@ import BarChart from '../../components/TireWearChart/TireWearChart';
 import TrackPositionChart from '../../components/TrackPositionChart/TrackPositionChart';
 import { DataContext } from '../../contexts/DataContextProvider';
 import SpeedChart from '../../components/SpeedChart/SpeedChart';
+import SteeringWheel from '../../components/SteeringWeel/SteeringWeel';
 
 const LiveView: React.FC = () => {
     const classes = useStyles();
@@ -12,9 +13,9 @@ const LiveView: React.FC = () => {
         engineTemp,
         middlePosition,
         rotation,
-        speed,
-        breaks,
+        brakes,
         throttle,
+        steeringWheelPosition,
     } = useContext(DataContext);
 
     const chartComponents = useMemo(
@@ -24,21 +25,17 @@ const LiveView: React.FC = () => {
                     'Engine temperature',
                     'Tire wear',
                     'Throttle',
-                    'Breaks',
+                    'Brakes',
                 ]}
-                dataSet={[engineTemp, tireWear, throttle, breaks]}
+                dataSet={[engineTemp, tireWear, throttle, brakes]}
                 criticalThreshold={70}
                 neutralThreshold={50}
                 key={1}
                 title={''}
             />,
-            <BarChart
-                labels={['Speed']}
-                dataSet={speed}
-                criticalThreshold={70}
-                neutralThreshold={50}
+            <SteeringWheel
                 key={2}
-                title={'Speed'}
+                steeringWheelPosition={steeringWheelPosition}
             />,
             <TrackPositionChart
                 position={middlePosition}
@@ -51,8 +48,8 @@ const LiveView: React.FC = () => {
             engineTemp,
             tireWear,
             throttle,
-            breaks,
-            speed,
+            brakes,
+            steeringWheelPosition,
             middlePosition,
             rotation,
         ]
