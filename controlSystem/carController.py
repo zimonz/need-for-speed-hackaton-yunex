@@ -14,7 +14,7 @@ class CarController:
         self.carData = None
         self.carCommand = None
         self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
-        self.speedPid = PID(Kp=10, Ki=0.01, Kd=0.1, setpoint=10)
+        self.speedPid = PID(Kp=0.01, Ki=0.5, Kd=0.1, setpoint=30)
         self.speedPid.output_limits = (-100, 100)
         self.command = {}
         self.command["Throttle"] = 0
@@ -107,12 +107,22 @@ class CarController:
         
         throttle = self.limitValue(throttle, 0, 100)
         brakes = self.limitValue(brakes, 0, 100)
-        print("sumAngle:", sumAngle, "Linear Result", speed_adjustment, "Throttle:", throttle, "Brakes:", brakes)
+        # print("sumAngle:", sumAngle, "Linear Result", speed_adjustment, "Throttle:", throttle, "Brakes:", brakes)
         return throttle, brakes
         
     def gearShifter(self):
         speed = self.carData["CurrentSpeed"]
         current_gear = self.carData["CurrentGear"]
+        
+        gear_mapping = {
+            1: 5,
+            2: 15,
+            3: 40,
+            4: 50,
+            5: 60
+        }
+        
+        hysteresis_offset = 5
         
         if not hasattr(self, 'gear_shift_counter'):
             self.gear_shift_counter = 0
@@ -120,21 +130,21 @@ class CarController:
         self.gear_shift_counter += 1
         
         if self.gear_shift_counter % 10 == 0:
-            if speed < 4:
-                desired_gear = 1
-            elif 4 <= speed < 8:
-                desired_gear = 2
-            elif 8 <= speed < 12:
+            desired_gear = current_gear
+            for gear, speed_threshold in gear_mapping.items():
+                if speed < speed_threshold - hysteresis_offset:
+                    desired_gear = gear
+                    break
+                elif speed > speed_threshold + hysteresis_offset:
+                    desired_gear = gear + 1
+                    break
+                
+            if desired_gear > 3:  # limit gear to 3
                 desired_gear = 3
-            elif 12 <= speed < 30:
-                desired_gear = 4
-            elif speed >= 30:
-                desired_gear = 5
-            else:
-                desired_gear = current_gear
             
-            print("Current Gear:", current_gear, "Desired Gear:", desired_gear)
-            desired_gear = 2
+
+            if desired_gear > 3: #limit gear to 3
+                desired_gear = 3
             
             while current_gear != desired_gear:
                 if current_gear < desired_gear:
@@ -143,6 +153,7 @@ class CarController:
                     self.socket.send(b'{"GearSelection": "down"}')
                 self.receive_data()
                 current_gear = self.carData["CurrentGear"]
+            print("Current Gear:", current_gear, "Desired Gear:", desired_gear, "Speed:", int(speed), "Throttle:", int(self.carCommand["Throttle"]))
     
     def recordRunToFile(self):
         # Extract necessary car data
