@@ -22,6 +22,7 @@ class CarController:
         self.command["SteeringWheel"] = 0
         self.command["Gear"] = 0
         self.logFile = open("log.csv", "w")
+        self.logFile.write("Timestamp,Speed,DistanceFromCenter,TrackAngle,TrackDistance,WorldPosition,WorldRotation,Throttle,Brakes,Steering,Gear\n")
     
     def send_command(self, throttle, brakes, steering, reset):
         self.carCommand = {
@@ -149,8 +150,8 @@ class CarController:
         distance_from_center = self.carData['TrackInfo']["DistanceToMiddle"]
         track_angle = self.carData["TrackInfo"]["AngleToMiddle"]
         track_distance = self.carData["TrackInfo"]["TrackDistance"]
-        world_position = self.carData["WorldPosition"]
-        world_rotation = self.carData["WorldRotation"]
+        world_position = self.carData["TrackInfo"]["WorldPosition"]
+        world_rotation = self.carData["TrackInfo"]["WorldRotation"]
         throttle = self.carCommand["Throttle"]
         brakes = self.carCommand["Brakes"]
         steering = self.carCommand["SteeringWheel"]
@@ -178,6 +179,7 @@ class CarController:
             self.gearShifter()
             self.send_command(throttle, brakes, steering, reset)
             self.receive_data()
+            self.recordRunToFile()
             self.checkForReset()
             if self.checkForExit():
                 break
