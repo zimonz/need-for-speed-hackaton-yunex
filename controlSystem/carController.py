@@ -90,52 +90,44 @@ class CarController:
         setPoint = self.setPointData[intCurrentTrackDistance]
         throttle = setPoint["Throttle"]
         brakes = setPoint["Brakes"]
+        print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]))
         return throttle, brakes
         
     def gearShifter(self):
         speed = self.carData["CurrentSpeed"]
         current_gear = self.carData["CurrentGear"]
-        
-        gear_mapping = {
-            1: 5,
-            2: 15,
-            3: 40,
-            4: 50,
-            5: 60
-        }
-        
-        hysteresis_offset = 5
-        
-        if not hasattr(self, 'gear_shift_counter'):
-            self.gear_shift_counter = 0
-        
-        self.gear_shift_counter += 1
-        
-        if self.gear_shift_counter % 10 == 0:
-            desired_gear = current_gear
-            for gear, speed_threshold in gear_mapping.items():
-                if speed < speed_threshold - hysteresis_offset:
-                    desired_gear = gear
-                    break
-                elif speed > speed_threshold + hysteresis_offset:
-                    desired_gear = gear + 1
-                    break
-                
-            if desired_gear > 3:  # limit gear to 3
-                desired_gear = 3
-            
 
-            if desired_gear > 3: #limit gear to 3
-                desired_gear = 3
+        shift_mapping = [ 
+                         (0, 9), 
+                         (1, 16), 
+                         (14, 24), #gear 3
+                         (20, 40), #gear 4
+                         (30, 50), 
+                         (80, np.inf) 
+                         ]
+        
+        downshift_speed, upshift_speed = shift_mapping[current_gear - 1]
+        
+        if speed > upshift_speed and current_gear < len(shift_mapping):
+            desired_gear = current_gear + 1
+        elif speed < downshift_speed and current_gear > 1:
+            desired_gear = current_gear - 1
+        else:
+            desired_gear = current_gear
+
+        if current_gear == 0:
+            desired_gear = 1
             
-            while current_gear != desired_gear:
-                if current_gear < desired_gear:
-                    self.socket.send(b'{"GearSelection": "up"}')
-                elif current_gear > desired_gear:
-                    self.socket.send(b'{"GearSelection": "down"}')
-                self.receive_data()
-                current_gear = self.carData["CurrentGear"]
-            # print("Current Gear:", current_gear, "Desired Gear:", desired_gear, "Speed:", int(speed), "Throttle:", int(self.carCommand["Throttle"]), "Brakes:", int(self.carCommand["Brakes"]))
+        while current_gear != desired_gear:
+            if self.carData["CarInfo"]["BrokenShifter"]:
+                break
+            
+            if current_gear < desired_gear:
+                self.socket.send(b'{"GearSelection": "up"}')
+            elif current_gear > desired_gear:
+                self.socket.send(b'{"GearSelection": "down"}')
+            self.receive_data()
+            current_gear = self.carData["CurrentGear"]
     
     def recordRunToFile(self):
         # Extract necessary car data
@@ -167,7 +159,7 @@ class CarController:
     def control_loop(self):
         self.send_command( 0, 0, 0, "False")
         self.receive_data()
-        self.setPointData = helper.readCSVLogFile("log copy.csv")
+        self.setPointData = helper.readCSVLogFile("workFile.csv")
         while True:
             throttle, brakes, steering, reset = self.compute_control()
             self.gearShifter()
