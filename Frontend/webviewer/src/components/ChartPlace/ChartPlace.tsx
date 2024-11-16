@@ -17,9 +17,8 @@ const useStyles = createUseStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        border: '1px solid #ddd',
         boxSizing: 'border-box',
-        backgroundColor: '#555',
+        backgroundColor: 'transparent',
     },
     empty: {
         '&:hover': {

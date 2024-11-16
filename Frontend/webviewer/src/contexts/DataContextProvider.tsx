@@ -23,7 +23,7 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     }, []);
 
     useEffect(() => {
-        console.log(engineTemp);
+        // console.log(engineTemp);
     }, [engineTemp]);
 
     return (

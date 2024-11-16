@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
-import ChartPlace from '../../components/ChartPlace/ChartPlace';
-import TireWearChart from '../../components/TireWearChart/TireWearChart';
+import BarChart from '../../components/TireWearChart/TireWearChart';
 import TrackPositionChart from '../../components/TrackPositionChart/TrackPositionChart';
-import { IconButton } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SpeedTracker from '../../components/SpeedTracker/SpeedTracker';
 
 const LiveView: React.FC = () => {
     const classes = useStyles();
@@ -12,55 +10,54 @@ const LiveView: React.FC = () => {
 
     useEffect(() => {
         setCharts([
-            <ChartPlace key={1} />,
-            <ChartPlace key={3} />,
-            <TrackPositionChart position={1} key={4} />,
-            <TireWearChart key={1} />,
+            <BarChart
+                dataSet={Math.random() * 100}
+                criticalThreshold={70}
+                neutralThreshold={50}
+                key={2}
+                title={'Engine temperature'}
+            />,
+            <BarChart
+                dataSet={Math.random() * 100}
+                criticalThreshold={70}
+                neutralThreshold={50}
+                key={2}
+                title={'Tire wear'}
+            />,
+            <TrackPositionChart position={1} key={3} />,
+            <SpeedTracker key={4} />,
         ]);
     }, []);
     return (
-        <>
-            <div className={classes.sidebar}>{/* <SideBar /> */}</div>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'nowrap',
+                width: '100%',
+                height: '100%',
+            }}
+        >
             <div className={classes.layout}>{charts.map(value => value)}</div>
-            <div className={classes.pageChange}>
-                <IconButton aria-label="home">
-                    <KeyboardArrowDownIcon />
-                </IconButton>
-            </div>
-        </>
+        </div>
     );
 };
 
 const useStyles = createUseStyles({
-    sidebar: {
-        width: '2vw',
-        height: '100vh',
-    },
     layout: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         height: '100vh',
-        width: '98vw',
+        width: '100vw',
         flexWrap: 'wrap',
         fontFamily: 'Helvetica, sans-serif',
+        boxSizing: 'border-box',
         '&>section': {
             width: '50%',
-            height: '50vh',
+            height: '50%',
         },
-    },
-    pageChange: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '5vh',
-        width: '100vw',
-        backgroundColor: '#fff',
-        borderTop: '1px solid #ddd',
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
     },
 });
 

@@ -20,6 +20,7 @@ const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
             <div className={classes.chartArea}>
                 <span className={classes.yAxis}></span>
                 <span className={classes.xAxis}></span>
+                <span className={classes.indicator}></span>
             </div>
         </section>
     );
@@ -33,8 +34,8 @@ const useStyles = createUseStyles({
         alignItems: 'flex-start',
         padding: '1em',
         boxSizing: 'border-box',
-        height: '50vh',
-        width: '50vw',
+        height: '100%',
+        width: '100%',
     },
     chartArea: {
         display: 'flex',
@@ -55,6 +56,16 @@ const useStyles = createUseStyles({
         width: '100%',
         height: 1,
         backgroundColor: '#000',
+    },
+    indicator: {
+        position: 'absolute',
+        width: 0,
+        height: 0,
+        borderLeft: '5vw solid transparent',
+        borderRight: '5vw solid transparent',
+        borderBottom: '10vw solid black',
+        color: 'rgb(150,150,150)',
+        margin: 0,
     },
 });
 export default TrackPositionChart;

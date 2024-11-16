@@ -1,0 +1,14 @@
+/* :hover {
+    svg {
+        path {
+            stroke: pink;
+        }
+    }
+} */
+
+/* .sector {
+    transition: transform 0.1s ease-in-out;
+} */
+.sector:hover {
+    /* transform: scale(1.05); */
+}

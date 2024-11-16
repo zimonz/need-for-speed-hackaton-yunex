@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -20,43 +20,62 @@ ChartJS.register(
     Legend
 );
 
-const TireWearChart: React.FC = () => {
+interface TireWearChartProps {
+    title: string;
+    dataSet: number;
+    max?: number;
+    neutralThreshold?: number;
+    criticalThreshold?: number;
+}
+
+const BarChart: React.FC<TireWearChartProps> = ({
+    title = '',
+    dataSet,
+    max,
+    neutralThreshold = 100,
+    criticalThreshold = 100,
+}) => {
     const classes = useStyles();
-    const data = {
-        labels: [''],
-        datasets: [
-            {
-                label: 'Tire Wear (%)',
-                data: [75], // Example data
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-            },
-        ],
-    };
+    const [background, setBackground] = useState<string>(
+        'rgba(75, 192, 192, 0.2'
+    );
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: 'top' as const,
-            },
-            title: {
-                display: true,
-                text: 'Tire Wear',
-            },
-        },
+        plugins: {},
         scales: {
             y: {
                 beginAtZero: true,
-                max: 100,
+                max: max || 100,
             },
         },
     };
 
+    useEffect(() => {
+        if (dataSet >= criticalThreshold) {
+            setBackground('rgba(255, 99, 132, 0.8)');
+        } else if (dataSet >= neutralThreshold) {
+            setBackground('rgba(255, 206, 86, 0.5)');
+        } else {
+            setBackground('rgba(75, 192, 192, 0.2)');
+        }
+    }, [dataSet, neutralThreshold, criticalThreshold]);
+
     return (
         <section className={classes.chart}>
-            <Bar data={data} options={options} />
+            <Bar
+                data={{
+                    labels: [''],
+                    datasets: [
+                        {
+                            label: title,
+                            data: [dataSet],
+                            backgroundColor: background,
+                        },
+                    ],
+                }}
+                options={options}
+            />
         </section>
     );
 };
@@ -65,7 +84,8 @@ const useStyles = createUseStyles({
     chart: {
         width: '100%',
         height: '100%',
+        boxSizing: 'border-box',
     },
 });
 
-export default TireWearChart;
+export default BarChart;
