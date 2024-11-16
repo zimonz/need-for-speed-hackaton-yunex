@@ -14,7 +14,7 @@ class CarController:
         self.carData = None
         self.carCommand = None
         self.steeringPid = PID(Kp=10, Ki=0.5, Kd=20, setpoint=0)
-        self.speedPid = PID(Kp=0.01, Ki=0.5, Kd=0.1, setpoint=30)
+        self.speedPid = PID(Kp=0.01, Ki=0.5, Kd=0.1, setpoint=10)
         self.speedPid.output_limits = (-100, 100)
         self.command = {}
         self.command["Throttle"] = 0
@@ -168,7 +168,7 @@ class CarController:
         steering = self.carCommand["SteeringWheel"]
         gear = self.carData["CurrentGear"]
         #log to csv file
-        self.logFile.write(f"{time.time()},{speed},{distance_from_center},{track_angle},{track_distance},{world_position},{world_rotation},{throttle},{brakes},{steering},{gear}\n")
+        self.logFile.write(f"{time.time()};{speed};{distance_from_center};{track_angle};{track_distance};{world_position};{world_rotation};{throttle};{brakes};{steering};{gear}\n")
         
     def checkForExit(self):
         if keyboard.is_pressed('esc'):
