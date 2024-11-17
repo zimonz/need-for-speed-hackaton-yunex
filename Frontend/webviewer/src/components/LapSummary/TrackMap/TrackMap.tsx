@@ -1,5 +1,5 @@
 import Tooltip from '@mui/material/Tooltip';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { LapTime } from '../LapTimes/LapTimes';
 import { SectorData } from '../../../contexts/DataContextProvider';
@@ -14,7 +14,7 @@ interface TrackMapProps {
 const TrackMap: React.FC<TrackMapProps> = ({
     laptime,
     currentSector,
-    lapTimes = [],
+    // lapTimes = [],
     trackPosition = 0,
 }) => {
     const classes = useStyles();
@@ -24,30 +24,30 @@ const TrackMap: React.FC<TrackMapProps> = ({
         sector2: 'lightgray',
         sector3: 'lightgray',
     });
-    const sector1 = useMemo(
-        () => lapTimes.map(lapTime => lapTime.sector1),
-        [lapTimes]
-    );
-    const sector2 = useMemo(
-        () => lapTimes.map(lapTime => lapTime.sector2),
-        [lapTimes]
-    );
-    const sector3 = useMemo(
-        () => lapTimes.map(lapTime => lapTime.sector3),
-        [lapTimes]
-    );
+    // const sector1 = useMemo(
+    //     () => lapTimes.map(lapTime => lapTime.sector1),
+    //     [lapTimes]
+    // );
+    // const sector2 = useMemo(
+    //     () => lapTimes.map(lapTime => lapTime.sector2),
+    //     [lapTimes]
+    // );
+    // const sector3 = useMemo(
+    //     () => lapTimes.map(lapTime => lapTime.sector3),
+    //     [lapTimes]
+    // );
     const [sector1Position, setSector1Position] = useState<number | null>(null);
     const [sector2Position, setSector2Position] = useState<number | null>(null);
     const [sector3Position, setSector3Position] = useState<number | null>(null);
 
-    const [fastestSector1, fastestSector2, fastestSector3] = useMemo(
-        () => [
-            Math.min(...sector1),
-            Math.min(...sector2),
-            Math.min(...sector3),
-        ],
-        [sector1, sector2, sector3]
-    );
+    // const [fastestSector1, fastestSector2, fastestSector3] = useMemo(
+    //     () => [
+    //         Math.min(...sector1),
+    //         Math.min(...sector2),
+    //         Math.min(...sector3),
+    //     ],
+    //     [sector1, sector2, sector3]
+    // );
 
     useEffect(() => {
         if (
@@ -104,8 +104,8 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     onMouseEnter={() =>
                         setTooltipText(
                             `Sector 1: ${
-                                laptime.sector1 || 'no time'
-                            }s -> Fastest Time: ${fastestSector1}s`
+                                laptime ? laptime.sector1 + 's' : 'no time'
+                            }`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}
@@ -125,8 +125,8 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     onMouseEnter={() =>
                         setTooltipText(
                             `Sector 3: ${
-                                laptime.sector3 || 'no time'
-                            }s -> Fastest Time: ${fastestSector3}s`
+                                laptime ? laptime.sector3 + 's' : 'no time'
+                            }`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}
@@ -146,8 +146,8 @@ const TrackMap: React.FC<TrackMapProps> = ({
                     onMouseEnter={() =>
                         setTooltipText(
                             `Sector 2: ${
-                                laptime.sector2 || 'no time'
-                            }s -> Fastest Time: ${fastestSector2}s`
+                                laptime ? laptime.sector2 + 's' : 'no time'
+                            }`
                         )
                     }
                     onMouseLeave={() => setTooltipText(``)}

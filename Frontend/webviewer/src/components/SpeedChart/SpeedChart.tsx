@@ -70,7 +70,7 @@ const SpeedChart: React.FC<SpeedChartProps> = ({ additionalDataSets = [] }) => {
                 // display: false,
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Speed',
             },
         },
