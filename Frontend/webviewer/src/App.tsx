@@ -3,6 +3,7 @@ import './App.css';
 import DataContextProvider from './contexts/DataContextProvider';
 import LiveView from './views/LiveView/LiveView';
 import AnalysisView from './views/AnalysisView/AnalysisView';
+import SnackBarArea from './components/SnackBarArea/SnackBarArea';
 
 function App() {
     const classes = useStyles();
@@ -10,14 +11,16 @@ function App() {
     return (
         <>
             <DataContextProvider>
-                <div className={classes.app}>
-                    <div className={classes.page}>
-                        <LiveView />
+                <SnackBarArea>
+                    <div className={classes.app}>
+                        <div className={classes.page}>
+                            <LiveView />
+                        </div>
+                        <div className={classes.page}>
+                            <AnalysisView />
+                        </div>
                     </div>
-                    <div className={classes.page}>
-                        <AnalysisView />
-                    </div>
-                </div>
+                </SnackBarArea>
             </DataContextProvider>
         </>
     );

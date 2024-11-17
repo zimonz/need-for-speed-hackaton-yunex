@@ -66,6 +66,7 @@ const LiveView: React.FC = () => {
             middlePosition,
             rotation,
             middleAngleHistory,
+            middleDistanceHistory,
         ]
     );
     return (

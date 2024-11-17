@@ -55,7 +55,7 @@ const SpeedChart: React.FC<SpeedChartProps> = ({ additionalDataSets = [] }) => {
                 ...additionalDataSets,
             ],
         }),
-        [speedHistory]
+        [additionalDataSets, speedHistory]
     );
 
     const options: ChartOptions<'line'> = {

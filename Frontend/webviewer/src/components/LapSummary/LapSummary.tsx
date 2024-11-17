@@ -26,6 +26,8 @@ const LapSummary: React.FC = () => {
         };
     }, [lapTimes]);
 
+    console.log(fastestTimes);
+
     return (
         <div className={classes.layout}>
             <div className={classes.track}>
