@@ -74,15 +74,12 @@ class CarController:
         speed = self.carData["CurrentSpeed"]
         distance_from_center = self.carData['TrackInfo']["DistanceToMiddle"]
         track_angle = self.carData["TrackInfo"]["AngleToMiddle"]
-        # Determine the next turn angle based on upcoming track information
-        upcoming_track_info = self.carData["UpcomingTrackInfoFollowing"]
-        next_turn_angle = upcoming_track_info["10"]  # Example: using the angle at 10 units ahead
         k1 = 0.8
         k2 = 0.30
         # Adjust steering
         offset = 0
         if speed > 20:
-            offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1, 40, 60, 20, -5, -25, offset) #Kurve 0
+            offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 20, 40, 60, 15, 5, -25, offset) #Kurve 0
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 220, 290, 346, 0, 8, -22, offset) #Kurve 1
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 390, 421, 466, 5, 7, -5, offset) #Kurve 2
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 840, 877, 906, 0, 8, -25, offset) #Kurve 3
@@ -90,10 +87,10 @@ class CarController:
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1166, 1214, 1220, -15, 10, 15, offset) #Kurve 5
         # offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1221, 1240, 1272, 15, 0, 0, offset) #Kurve 6
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1273, 1360, 1429, 5, 5, 5, offset) #Kurve 7
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1430, 1431, 1478, 5, 5, -10, offset) #Kurve 8
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1430, 1431, 1478, 5, -5, -10, offset) #Kurve 8
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1500, 1592, 1627, 3, -3, 5, offset) #Kurve 8.1
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1677, 1707, 1732, -3, 5, 0, offset) #Kurve 9
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1733, 1765, 1788, 0, -5, 0, offset) #Kurve 10
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1733, 1765, 1788, 0, -5, -15, offset) #Kurve 10
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1805, 1837, 1905, 0, -5, 5, offset) #Kurve 11
         
         #- nach links, + nach rechts
@@ -138,7 +135,7 @@ class CarController:
             setPoint = self.setPointData[intCurrentTrackDistance - 1]
         throttle = int(setPoint["Throttle"])*scalingFactorAccelerate
         brakes = int(setPoint["Brakes"])*(1-scalingFactorBrake)
-        # print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]))
+        print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]),"TireWear:", self.carData["CarInfo"]["TireWear"], "BrakeWear:", self.carData["CarInfo"]["BrakeWear"])
         return throttle, brakes
         
     def gearShifter(self):
@@ -246,14 +243,20 @@ class CarController:
         self.firstRound = False
 
     def doPitStop(self):
-        if self.carData["CarInfo"]["BrakeWear"] > 80 or self.carData["CarInfo"]["TireWear"] > 10:
+        if self.carData["CarInfo"]["BrakeWear"] > 80 or self.carData["CarInfo"]["TireWear"] > 70 or self.carData["CarInfo"]["TireExploded"]:
             print("Pitstop necessary")
-            if self.carData["TrackInfo"]["TrackDistance"] > 1800:
+            if self.carData["TrackInfo"]["TrackDistance"] > 1900:
                 print("Pitstop started")
+                # distance_from_center = self.carData['TrackInfo']["DistanceToMiddle"]
+                # steering = self.steeringPid(distance_from_center)
+                # steering = self.limitValue(steering, -100, 100)
                 self.socket.send(b'{"Throttle": "0", "Brakes": "100"}')
                 self.receive_data()
-                time.sleep(4)
+                time.sleep(5)
                 print("Pitstop done")
+                self.socket.send(b'{"Throttle": "100", "Brakes": "0"}')
+                self.receive_data()
+                time.sleep(4)
                 
 
             
@@ -269,7 +272,7 @@ class CarController:
             throttle, brakes, steering, reset = self.compute_control()
             self.gearShifter()
             self.overrideFirstMeters()
-            self.printLastandFastestLap()
+            # self.printLastandFastestLap()
             self.doPitStop()
             self.send_command(throttle, brakes, steering, reset)
             self.receive_data()
