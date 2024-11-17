@@ -8,13 +8,13 @@ interface TrackPositionChartProps {
 }
 
 const indicatorSize: number = 8;
-const koefficient: number = 3;
+const koefficient: number = 4.5;
 
 const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
     position,
     rotation = 0,
 }) => {
-    const {carFailure} = useContext(DataContext);
+    const { carFailure } = useContext(DataContext);
     const classes = useStyles();
 
     return (
@@ -25,12 +25,14 @@ const TrackPositionChart: React.FC<TrackPositionChartProps> = ({
                 <span
                     className={classes.indicator}
                     style={{
-                        left: `calc(50% + ${position * koefficient}% - ${
+                        left: `Min(calc(50% + ${position * koefficient}% - ${
                             indicatorSize / 2.5
-                        }vw)`,
+                        }vw), 100%)`,
                         transition: 'all 0.5s ease',
                         transform: `rotate(${rotation}deg)`,
-                        borderBottom: `${indicatorSize}vw solid ${carFailure ? 'tomato' : 'rgb(50, 200, 50)'}`,
+                        borderBottom: `${indicatorSize}vw solid ${
+                            carFailure ? 'tomato' : 'rgb(50, 200, 50)'
+                        }`,
                     }}
                 >
                     <span

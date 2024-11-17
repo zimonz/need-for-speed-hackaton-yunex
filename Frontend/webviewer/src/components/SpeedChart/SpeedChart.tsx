@@ -25,7 +25,17 @@ ChartJS.register(
     Legend
 );
 
-const SpeedChart: React.FC = () => {
+interface SpeedChartProps {
+    additionalDataSets?: {
+        label: string;
+        data: number[];
+        fill: false;
+        borderColor: string;
+        tension: number;
+    }[];
+}
+
+const SpeedChart: React.FC<SpeedChartProps> = ({ additionalDataSets = [] }) => {
     const classes = useStyles();
     const { speedHistory } = useContext(DataContext);
 
@@ -42,6 +52,7 @@ const SpeedChart: React.FC = () => {
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1,
                 },
+                ...additionalDataSets,
             ],
         }),
         [speedHistory]
@@ -51,12 +62,12 @@ const SpeedChart: React.FC = () => {
         responsive: true,
         animation: {
             easing: 'linear',
-            duration: 0
+            duration: 0,
         },
         plugins: {
             legend: {
                 position: 'top',
-                display: false,
+                // display: false,
             },
             title: {
                 display: true,
@@ -64,17 +75,16 @@ const SpeedChart: React.FC = () => {
             },
         },
         elements: {
-            point:{
-                radius: 0
-            }
+            point: {
+                // radius: 0,
+            },
         },
         scales: {
             y: {
                 beginAtZero: true,
-                min: 0,
-                suggestedMax: 250
-            }
-        }
+                suggestedMax: 250,
+            },
+        },
     };
 
     return (

@@ -10,12 +10,13 @@ const LiveView: React.FC = () => {
     const classes = useStyles();
     const {
         tireWear,
-        engineTemp,
         middlePosition,
         rotation,
         brakes,
         throttle,
         steeringWheelPosition,
+        middleAngleHistory,
+        middleDistanceHistory,
     } = useContext(DataContext);
 
     const chartComponents = useMemo(
@@ -37,16 +38,34 @@ const LiveView: React.FC = () => {
                 rotation={rotation}
                 key={3}
             />,
-            <SpeedChart key={4} />,
+            <SpeedChart
+                additionalDataSets={[
+                    {
+                        label: 'Angle to middle',
+                        borderColor: 'rgb(192, 75, 192)',
+                        data: middleAngleHistory,
+                        fill: false,
+                        tension: 0.1,
+                    },
+                    {
+                        label: 'Distance to middle',
+                        borderColor: 'rgb(192, 192, 75)',
+                        data: middleDistanceHistory,
+                        fill: false,
+                        tension: 0.1,
+                    },
+                ]}
+                key={4}
+            />,
         ],
         [
-            engineTemp,
             tireWear,
             throttle,
             brakes,
             steeringWheelPosition,
             middlePosition,
             rotation,
+            middleAngleHistory,
         ]
     );
     return (

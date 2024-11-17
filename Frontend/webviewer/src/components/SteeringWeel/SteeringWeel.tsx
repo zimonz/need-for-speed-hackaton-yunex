@@ -21,6 +21,7 @@ const SteeringWheel: React.FC<{
                     width: '100%',
                     transform: `rotate(${steeringWheelPosition}deg)`,
                     transition: 'all 0.5s ease',
+                    pointerEvents: 'none',
                 }}
             >
                 <SteeringWheelSvg
@@ -29,7 +30,6 @@ const SteeringWheel: React.FC<{
                     gear={gear}
                     speed={speed.toFixed(0)}
                 />
-                {/* <SteeringWheelSvg width={'50%'} height={'50%'} /> */}
             </div>
         </section>
     );
@@ -40,6 +40,7 @@ const useStyles = createUseStyles({
         width: '100%',
         height: '100%',
         boxSizing: 'border-box',
+        background: 'rgb(120,120,120)',
     },
 });
 export default SteeringWheel;

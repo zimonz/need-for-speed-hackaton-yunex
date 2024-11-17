@@ -20,6 +20,8 @@ export interface DataContextType {
     lastLap: number;
     laps: LapTime[];
     carFailure: boolean;
+    middleAngleHistory: number[];
+    middleDistanceHistory: number[];
 }
 
 export const SectorData = [
@@ -83,7 +85,7 @@ interface ResponseData {
     TrackInfo: TrackInfo;
     CarInfo: CarInfo;
     UpcomingTrackInfoFollowing: { [key: string]: number };
-    Laps?: LapTime[];
+    LatestLaptimes: LapTime[];
 }
 
 export const MAX_HISTORY_LENGTH = 100;
@@ -98,6 +100,10 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     const [tireWear, setTireWear] = useState<number>(0);
     const [speed, setSpeed] = useState<number>(0);
     const [speedHistory, setSpeedHistory] = useState<number[]>([]);
+    const [middleAngleHistory, setMiddleAngleHistory] = useState<number[]>([]);
+    const [middleDistanceHistory, setMiddleDistanceHistory] = useState<
+        number[]
+    >([]);
     const [gear, setGear] = useState<number>(0);
     const [middlePosition, setMiddlePosition] = useState<number>(0);
     const [rotation, setRotation] = useState<number>(0);
@@ -109,12 +115,10 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
     const [steeringWheelPosition, setSteeringWheelPosition] =
         useState<number>(0);
     const [lastLap, setLastLap] = useState<number>(0);
-    const [laps, setLaps] = useState<LapTime[]>([
-        { sector1: 0, sector2: 0, sector3: 0, total: 0 },
-    ]);
+    const [laps, setLaps] = useState<LapTime[]>([]);
 
     useEffect(() => {
-        const ws = new WebSocket('ws://localhost:5000/ws');
+        const ws = new WebSocket(import.meta.env.VITE_WS_HOST);
         ws.onopen = () => console.log('WebSocket connected');
         ws.onclose = () => console.log('WebSocket disconnected');
 
@@ -140,30 +144,48 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
         setBrokenShifter(response.CarInfo.BrokenShifter);
         setTireExploded(response.CarInfo.TireExploded);
         setLastLap(response.LastLap);
+        setLaps(response.LatestLaptimes);
     }, [response]);
 
-    useEffect(
-        () =>
-            setLaps(prev => {
-                if (
-                    !Object.keys(prev[prev.length - 1]).includes('total') ||
-                    lastLap <= 0 ||
-                    lastLap == prev[prev.length - 1].total
-                )
-                    return prev;
+    // useEffect(
+    //     () =>
+    //         setLaps(prev => {
+    //             console.log(laps);
+    //             if (prev.length == 0) return prev;
 
-                return [
-                    ...prev,
-                    {
-                        sector1: 0,
-                        sector2: 0,
-                        sector3: 0,
-                        total: lastLap,
-                    },
-                ];
-            }),
-        [lastLap, trackPosition]
-    );
+    //             if (
+    //                 laps[laps.length - 1].sector1 == null ||
+    //                 laps[laps.length - 1].sector2 == null ||
+    //                 laps[laps.length - 1].sector3 == null
+    //             )
+    //                 setCurrentLap({
+    //                     sector1: laps[laps.length - 1].sector1 || 0,
+    //                     sector2,
+    //                     sector3,
+    //                     total: null,
+    //                 });
+
+    //                 if (
+    //                     laps[laps.length - 1].sector1 &&
+    //                     laps[laps.length - 1].sector2 &&
+    //                     laps[laps.length - 1].sector3 &&
+    //                     laps[laps.length - 1].total
+    //                 )
+    //                     return [...prev];
+
+    //             return prev;
+    //             // return [
+    //             //     ...prev,
+    //             //     {
+    //             //         sector1: 0,
+    //             //         sector2: 0,
+    //             //         sector3: 0,
+    //             //         total: lastLap,
+    //             //     },
+    //             // ];
+    //         }),
+    //     [laps]
+    // );
 
     useEffect(() => {
         setCarFailure(tireExploded || brokenShifter);
@@ -188,6 +210,26 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
         });
     }, [speed]);
 
+    useEffect(() => {
+        setMiddleDistanceHistory(prev => {
+            if (prev.length > MAX_HISTORY_LENGTH) {
+                prev.shift();
+            }
+
+            return [...prev, Math.round(middlePosition)];
+        });
+    }, [middlePosition]);
+
+    useEffect(() => {
+        setMiddleAngleHistory(prev => {
+            if (prev.length > MAX_HISTORY_LENGTH) {
+                prev.shift();
+            }
+
+            return [...prev, Math.round(rotation)];
+        });
+    }, [rotation]);
+
     return (
         <DataContext.Provider
             value={{
@@ -208,6 +250,8 @@ const DataContextProvider: React.FC<{ children: ReactNode }> = ({
                 lastLap,
                 carFailure,
                 laps,
+                middleAngleHistory,
+                middleDistanceHistory,
             }}
         >
             {children}

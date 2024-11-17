@@ -1,18 +1,21 @@
 import Tooltip from '@mui/material/Tooltip';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { LapTime } from '../LapTimes/LapTimes';
+import { SectorData } from '../../../contexts/DataContextProvider';
 
 interface TrackMapProps {
     laptime: LapTime;
     currentSector?: number;
     lapTimes?: LapTime[];
+    trackPosition?: number;
 }
 
 const TrackMap: React.FC<TrackMapProps> = ({
     laptime,
     currentSector,
     lapTimes = [],
+    trackPosition = 0,
 }) => {
     const classes = useStyles();
     const [tooltipText, setTooltipText] = React.useState('');
@@ -33,6 +36,9 @@ const TrackMap: React.FC<TrackMapProps> = ({
         () => lapTimes.map(lapTime => lapTime.sector3),
         [lapTimes]
     );
+    const [sector1Position, setSector1Position] = useState<number | null>(null);
+    const [sector2Position, setSector2Position] = useState<number | null>(null);
+    const [sector3Position, setSector3Position] = useState<number | null>(null);
 
     const [fastestSector1, fastestSector2, fastestSector3] = useMemo(
         () => [
@@ -42,6 +48,33 @@ const TrackMap: React.FC<TrackMapProps> = ({
         ],
         [sector1, sector2, sector3]
     );
+
+    useEffect(() => {
+        if (
+            trackPosition >= SectorData[0].start &&
+            trackPosition <= SectorData[0].end
+        )
+            setSector1Position((trackPosition / SectorData[0].end) * 100);
+        else setSector1Position(null);
+
+        if (
+            trackPosition >= SectorData[1].start &&
+            trackPosition <= SectorData[1].end
+        )
+            setSector2Position((trackPosition / SectorData[1].end) * 100);
+        else setSector2Position(null);
+
+        if (
+            trackPosition >= SectorData[2].start &&
+            trackPosition <= SectorData[2].end
+        )
+            setSector3Position((trackPosition / SectorData[2].end) * 100);
+        else setSector3Position(null);
+    }, [trackPosition]);
+
+    useEffect(() => {
+        console.log(sector1Position, sector2Position, sector3Position);
+    }, [sector1Position, sector2Position, sector3Position]);
 
     useEffect(() => {
         setSectorColors({

@@ -6,7 +6,7 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
 
 export interface LapTime {
@@ -31,6 +31,18 @@ const LapTimes: React.FC<LapTimesProps> = ({
     slowestTimes,
 }) => {
     const classes = useStyles();
+
+    const cleanLapTimes = useMemo(() => {
+        return lapTimes.filter(laptime => {
+            return (
+                laptime.sector1 ||
+                (laptime.sector1 && laptime.sector2) ||
+                (laptime.sector2 && laptime.sector3)
+            );
+        });
+    }, [lapTimes]);
+
+    console.log(fastestTimes, slowestTimes);
 
     return (
         <Paper
@@ -67,7 +79,7 @@ const LapTimes: React.FC<LapTimesProps> = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {lapTimes.map((lapTime, index) => (
+                    {cleanLapTimes.map((lapTime, index) => (
                         <TableRow key={index} className={classes.row}>
                             <TableCell style={{ fontWeight: 'bold' }}>
                                 {index + 1}
@@ -82,7 +94,9 @@ const LapTimes: React.FC<LapTimesProps> = ({
                                         : '',
                                 ].join('')}
                             >
-                                {lapTime.sector1}
+                                {lapTime.sector1
+                                    ? lapTime.sector1.toFixed(3)
+                                    : '-'}
                             </TableCell>
                             <TableCell
                                 className={[
@@ -94,7 +108,9 @@ const LapTimes: React.FC<LapTimesProps> = ({
                                         : '',
                                 ].join(' ')}
                             >
-                                {lapTime.sector2}
+                                {lapTime.sector2
+                                    ? lapTime.sector2.toFixed(3)
+                                    : '-'}
                             </TableCell>
                             <TableCell
                                 className={[
@@ -106,7 +122,9 @@ const LapTimes: React.FC<LapTimesProps> = ({
                                         : '',
                                 ].join(' ')}
                             >
-                                {lapTime.sector3}
+                                {lapTime.sector3
+                                    ? lapTime.sector3.toFixed(3)
+                                    : '-'}
                             </TableCell>
                             <TableCell
                                 className={[
@@ -118,7 +136,7 @@ const LapTimes: React.FC<LapTimesProps> = ({
                                         : '',
                                 ].join(' ')}
                             >
-                                {lapTime.total}
+                                {lapTime.total ? lapTime.total.toFixed(3) : '-'}
                             </TableCell>
                         </TableRow>
                     ))}

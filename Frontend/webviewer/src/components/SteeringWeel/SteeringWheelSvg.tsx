@@ -10,10 +10,10 @@ const TrackMap: React.FC<{
 
     return (
         <svg
-            clip-rule="evenodd"
+            clipRule="evenodd"
             width={width}
             height={height}
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
             viewBox="0 0 566.93 368.50"
             version="1.1"
             id="svg2341"
@@ -29,8 +29,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-5.73282, -16.3335, -5.67383, 14.2345, 427.634, 333.036)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1316" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1318" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1316" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1318" />
                 </radialGradient>
                 <linearGradient
                     id="def2"
@@ -41,10 +41,10 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(39.4791, -5.00373, 6.67892, 50.5785, 130.365, 88.866)"
                 >
-                    <stop offset="0.00" stop-color="#333333" id="stop1321" />
-                    <stop offset="0.50" stop-color="#7F7F7F" id="stop1323" />
-                    <stop offset="0.50" stop-color="#808080" id="stop1325" />
-                    <stop offset="1.00" stop-color="#333333" id="stop1327" />
+                    <stop offset="0.00" stopColor="#333333" id="stop1321" />
+                    <stop offset="0.50" stopColor="#7F7F7F" id="stop1323" />
+                    <stop offset="0.50" stopColor="#808080" id="stop1325" />
+                    <stop offset="1.00" stopColor="#333333" id="stop1327" />
                 </linearGradient>
                 <linearGradient
                     id="def3"
@@ -55,9 +55,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-116.667, 0, 0, 312, 544.5, 45.5)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1330" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1332" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1334" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1330" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1332" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1334" />
                 </linearGradient>
                 <linearGradient
                     id="def4"
@@ -68,9 +68,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(3.63086e-05, -116.667, -334.749, -9.05008e-05, 523.573, 199.5)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1337" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1339" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1341" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1337" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1339" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1341" />
                 </linearGradient>
                 <linearGradient
                     id="def5"
@@ -81,9 +81,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(2.75192e-05, -104.386, -253.714, -8.09744e-05, 509.379, 358.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1344" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1346" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1348" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1344" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1346" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1348" />
                 </linearGradient>
                 <linearGradient
                     id="def6"
@@ -94,9 +94,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(2.75192e-05, -104.386, -253.714, -8.09744e-05, 515.379, 361.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1351" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1353" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1355" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1351" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1353" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1355" />
                 </linearGradient>
                 <linearGradient
                     id="def7"
@@ -107,9 +107,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(2.75192e-05, -104.386, -253.714, -8.09744e-05, 554.379, 135.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1358" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1360" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1362" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1358" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1360" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1362" />
                 </linearGradient>
                 <radialGradient
                     id="def8"
@@ -119,8 +119,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(5.73282, -16.3335, 5.67383, 14.2345, 139.197, 333.036)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1365" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1367" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1365" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1367" />
                 </radialGradient>
                 <linearGradient
                     id="def9"
@@ -131,10 +131,10 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-39.4791, -5.00373, -6.67892, 50.5785, 436.635, 88.866)"
                 >
-                    <stop offset="0.00" stop-color="#333333" id="stop1370" />
-                    <stop offset="0.50" stop-color="#7F7F7F" id="stop1372" />
-                    <stop offset="0.50" stop-color="#808080" id="stop1374" />
-                    <stop offset="1.00" stop-color="#333333" id="stop1376" />
+                    <stop offset="0.00" stopColor="#333333" id="stop1370" />
+                    <stop offset="0.50" stopColor="#7F7F7F" id="stop1372" />
+                    <stop offset="0.50" stopColor="#808080" id="stop1374" />
+                    <stop offset="1.00" stopColor="#333333" id="stop1376" />
                 </linearGradient>
                 <linearGradient
                     id="def10"
@@ -145,9 +145,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(116.667, 0, 0, 312, 22.5, 45.5)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1379" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1381" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1383" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1379" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1381" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1383" />
                 </linearGradient>
                 <linearGradient
                     id="def11"
@@ -158,9 +158,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-3.63086e-05, -116.667, 334.749, -9.05008e-05, 43.4274, 199.5)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1386" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1388" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1390" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1386" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1388" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1390" />
                 </linearGradient>
                 <linearGradient
                     id="def12"
@@ -171,9 +171,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-2.75192e-05, -104.386, 253.714, -8.09744e-05, 57.6209, 358.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1393" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1395" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1397" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1393" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1395" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1397" />
                 </linearGradient>
                 <linearGradient
                     id="def13"
@@ -184,9 +184,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-2.75192e-05, -104.386, 253.714, -8.09744e-05, 51.6209, 361.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1400" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1402" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1404" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1400" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1402" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1404" />
                 </linearGradient>
                 <linearGradient
                     id="def14"
@@ -197,9 +197,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-2.75192e-05, -104.386, 253.714, -8.09744e-05, 12.6209, 135.395)"
                 >
-                    <stop offset="0.00" stop-color="#191919" id="stop1407" />
-                    <stop offset="0.48" stop-color="#4C4C4C" id="stop1409" />
-                    <stop offset="0.96" stop-color="#191919" id="stop1411" />
+                    <stop offset="0.00" stopColor="#191919" id="stop1407" />
+                    <stop offset="0.48" stopColor="#4C4C4C" id="stop1409" />
+                    <stop offset="0.96" stopColor="#191919" id="stop1411" />
                 </linearGradient>
                 <radialGradient
                     id="def15"
@@ -209,8 +209,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1, 0, 0, 1, -164, 0)"
                 >
-                    <stop offset="0.80" stop-color="#555555" id="stop1414" />
-                    <stop offset="0.98" stop-color="#000000" id="stop1416" />
+                    <stop offset="0.80" stopColor="#555555" id="stop1414" />
+                    <stop offset="0.98" stopColor="#000000" id="stop1416" />
                 </radialGradient>
                 <radialGradient
                     id="def16"
@@ -220,8 +220,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1, 0, 0, 1, -82.5, 73)"
                 >
-                    <stop offset="0.80" stop-color="#555555" id="stop1419" />
-                    <stop offset="0.98" stop-color="#000000" id="stop1421" />
+                    <stop offset="0.80" stopColor="#555555" id="stop1419" />
+                    <stop offset="0.98" stopColor="#000000" id="stop1421" />
                 </radialGradient>
                 <linearGradient
                     id="def17"
@@ -232,9 +232,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(5.45079, -0.72593, 4.89234, 35.832, 135.516, 90.0896)"
                 >
-                    <stop offset="0.00" stop-color="#808000" id="stop1424" />
-                    <stop offset="0.52" stop-color="#FFCC66" id="stop1426" />
-                    <stop offset="0.99" stop-color="#808000" id="stop1428" />
+                    <stop offset="0.00" stopColor="#808000" id="stop1424" />
+                    <stop offset="0.52" stopColor="#FFCC66" id="stop1426" />
+                    <stop offset="0.99" stopColor="#808000" id="stop1428" />
                 </linearGradient>
                 <radialGradient
                     id="def18"
@@ -244,8 +244,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1.08537, 0, 0, 1.08537, -12.0305, -9.15929)"
                 >
-                    <stop offset="0.20" stop-color="#FFCC66" id="stop1431" />
-                    <stop offset="1.00" stop-color="#808000" id="stop1433" />
+                    <stop offset="0.20" stopColor="#FFCC66" id="stop1431" />
+                    <stop offset="1.00" stopColor="#808000" id="stop1433" />
                 </radialGradient>
                 <linearGradient
                     id="def19"
@@ -256,9 +256,9 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-5.45079, -0.72593, -4.89234, 35.832, 431.346, 90.0896)"
                 >
-                    <stop offset="0.00" stop-color="#808000" id="stop1436" />
-                    <stop offset="0.52" stop-color="#FFCC66" id="stop1438" />
-                    <stop offset="0.99" stop-color="#808000" id="stop1440" />
+                    <stop offset="0.00" stopColor="#808000" id="stop1436" />
+                    <stop offset="0.52" stopColor="#FFCC66" id="stop1438" />
+                    <stop offset="0.99" stopColor="#808000" id="stop1440" />
                 </linearGradient>
                 <radialGradient
                     id="def20"
@@ -268,8 +268,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-1.08537, 0, 0, 1.08537, 578.893, -9.15929)"
                 >
-                    <stop offset="0.20" stop-color="#FFCC66" id="stop1443" />
-                    <stop offset="1.00" stop-color="#808000" id="stop1445" />
+                    <stop offset="0.20" stopColor="#FFCC66" id="stop1443" />
+                    <stop offset="1.00" stopColor="#808000" id="stop1445" />
                 </radialGradient>
                 <radialGradient
                     id="def21"
@@ -279,8 +279,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1, 0, 0, 1, -40, -74)"
                 >
-                    <stop offset="0.80" stop-color="#555555" id="stop1448" />
-                    <stop offset="0.98" stop-color="#000000" id="stop1450" />
+                    <stop offset="0.80" stopColor="#555555" id="stop1448" />
+                    <stop offset="0.98" stopColor="#000000" id="stop1450" />
                 </radialGradient>
                 <radialGradient
                     id="def22"
@@ -290,8 +290,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1, 0, 0, 1, -125, -74)"
                 >
-                    <stop offset="0.80" stop-color="#555555" id="stop1453" />
-                    <stop offset="0.98" stop-color="#000000" id="stop1455" />
+                    <stop offset="0.80" stopColor="#555555" id="stop1453" />
+                    <stop offset="0.98" stopColor="#000000" id="stop1455" />
                 </radialGradient>
                 <radialGradient
                     id="def23"
@@ -301,8 +301,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(1, 0, 0, 1, 0, 0)"
                 >
-                    <stop offset="0.80" stop-color="#555555" id="stop1458" />
-                    <stop offset="0.98" stop-color="#000000" id="stop1460" />
+                    <stop offset="0.80" stopColor="#555555" id="stop1458" />
+                    <stop offset="0.98" stopColor="#000000" id="stop1460" />
                 </radialGradient>
                 <radialGradient
                     id="def24"
@@ -312,8 +312,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(5.73282, -18.2563, 5.67383, 15.9102, 145.367, 171.156)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1463" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1465" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1463" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1465" />
                 </radialGradient>
                 <radialGradient
                     id="def25"
@@ -323,8 +323,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-5.73282, -18.2563, -5.67383, 15.9102, 421.634, 171.16)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1468" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1470" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1468" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1470" />
                 </radialGradient>
                 <radialGradient
                     id="def26"
@@ -334,8 +334,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(-5.84706, -11.7589, 10.7586, 5.3315, 81.9022, 61.0036)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1473" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1475" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1473" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1475" />
                 </radialGradient>
                 <radialGradient
                     id="def27"
@@ -345,8 +345,8 @@ const TrackMap: React.FC<{
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(5.84706, -11.7589, -10.7586, 5.3315, 484.97, 60.7536)"
                 >
-                    <stop offset="0.00" stop-color="#494949" id="stop1478" />
-                    <stop offset="1.00" stop-color="#161616" id="stop1480" />
+                    <stop offset="0.00" stopColor="#494949" id="stop1478" />
+                    <stop offset="1.00" stopColor="#161616" id="stop1480" />
                 </radialGradient>
             </defs>
             <g id="g2339">
@@ -359,7 +359,7 @@ const TrackMap: React.FC<{
                     y="136.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="1.18"
+                    strokeWidth="1.18"
                     id="rect1485"
                 />
                 <rect
@@ -371,35 +371,35 @@ const TrackMap: React.FC<{
                     y="136.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="1.18"
+                    strokeWidth="1.18"
                     id="rect1487"
                 />
                 <path
                     d="M 130.64 89.78 C 129.95 86.70 131.89 83.65 134.98 82.97 L 177.38 73.63 C 180.47 72.96 183.53 74.91 184.22 77.99 L 192.37 114.31 C 193.06 117.40 191.12 120.45 188.03 121.13 L 145.63 130.46 C 142.54 131.14 139.48 129.19 138.79 126.10 Z M 130.64 89.78 "
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="0.96"
+                    strokeWidth="0.96"
                     id="path1489"
                 />
                 <path
                     d="M 436.36 89.77 C 437.05 86.69 435.12 83.64 432.03 82.96 L 389.62 73.63 C 386.54 72.96 383.48 74.91 382.78 77.99 L 374.64 114.28 C 373.95 117.36 375.89 120.41 378.97 121.09 L 421.38 130.41 C 424.47 131.09 427.53 129.14 428.22 126.06 Z M 436.36 89.77 "
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="0.96"
+                    strokeWidth="0.96"
                     id="path1491"
                 />
                 <path
                     d="M 85.63 247.20 C 84.95 244.01 86.99 240.88 90.19 240.22 L 155.40 226.64 C 158.60 225.97 161.74 228.02 162.41 231.22 L 170.37 268.81 C 171.05 272.01 169.00 275.14 165.81 275.80 L 100.60 289.38 C 97.40 290.05 94.26 288.00 93.59 284.80 Z M 85.63 247.20 "
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="1.16"
+                    strokeWidth="1.16"
                     id="path1493"
                 />
                 <path
                     d="M 481.37 247.19 C 482.05 244.00 480.00 240.87 476.81 240.20 L 411.60 226.63 C 408.40 225.96 405.26 228.01 404.59 231.21 L 396.63 268.80 C 395.95 272.00 398.00 275.13 401.19 275.79 L 466.40 289.37 C 469.60 290.04 472.74 287.99 473.41 284.79 Z M 481.37 247.19 "
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="1.16"
+                    strokeWidth="1.16"
                     id="path1495"
                 />
                 <path
@@ -680,9 +680,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text1585"
                 >
@@ -735,7 +735,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1601"
                 />
                 <ellipse
@@ -745,7 +745,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1603"
                 />
                 <ellipse
@@ -755,7 +755,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1605"
                 />
                 <ellipse
@@ -765,7 +765,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1607"
                 />
                 <ellipse
@@ -775,7 +775,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1609"
                 />
                 <ellipse
@@ -785,7 +785,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1611"
                 />
                 <ellipse
@@ -795,7 +795,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#00FF00"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1613"
                 />
                 <ellipse
@@ -805,7 +805,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#00FF00"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1615"
                 />
                 <ellipse
@@ -815,7 +815,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#00FF00"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1617"
                 />
                 <ellipse
@@ -825,7 +825,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#00FF00"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1619"
                 />
                 <ellipse
@@ -835,7 +835,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#00FF00"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1621"
                 />
                 <ellipse
@@ -845,7 +845,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1623"
                 />
                 <ellipse
@@ -855,7 +855,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1625"
                 />
                 <ellipse
@@ -865,7 +865,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1627"
                 />
                 <ellipse
@@ -875,7 +875,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1629"
                 />
                 <ellipse
@@ -885,7 +885,7 @@ const TrackMap: React.FC<{
                     ry="3.00"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="0.13"
+                    strokeWidth="0.13"
                     id="ellipse1631"
                 />
                 <ellipse
@@ -915,9 +915,9 @@ const TrackMap: React.FC<{
                 <g id="g1687">
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#000000"
                         id="text1641"
                     >
@@ -927,9 +927,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1645"
                     >
@@ -939,9 +939,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1649"
                     >
@@ -951,9 +951,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1653"
                     >
@@ -963,9 +963,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1657"
                     >
@@ -975,9 +975,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1661"
                     >
@@ -987,9 +987,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1665"
                     >
@@ -999,9 +999,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1669"
                     >
@@ -1011,9 +1011,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1673"
                     >
@@ -1023,9 +1023,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1677"
                     >
@@ -1035,9 +1035,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1681"
                     >
@@ -1047,9 +1047,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1685"
                     >
@@ -1065,7 +1065,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1689"
                 />
                 <ellipse
@@ -1075,7 +1075,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#01FE7F"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1691"
                 />
                 <rect
@@ -1112,7 +1112,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1699"
                     />
                     <ellipse
@@ -1122,7 +1122,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1701"
                     />
                 </g>
@@ -1149,7 +1149,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1709"
                 />
                 <ellipse
@@ -1159,7 +1159,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#FFFF66"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1711"
                 />
                 <g id="g1721">
@@ -1186,7 +1186,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1717"
                     />
                     <ellipse
@@ -1196,7 +1196,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1719"
                     />
                 </g>
@@ -1224,7 +1224,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1727"
                     />
                     <ellipse
@@ -1234,7 +1234,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1729"
                     />
                 </g>
@@ -1256,9 +1256,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFF00"
                     id="text1739"
                 >
@@ -1273,7 +1273,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1741"
                 />
                 <ellipse
@@ -1283,7 +1283,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#191919"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1743"
                 />
                 <ellipse
@@ -1309,14 +1309,14 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1749"
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text1753"
                 >
@@ -1331,7 +1331,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1755"
                 />
                 <ellipse
@@ -1357,7 +1357,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1761"
                 />
                 <ellipse
@@ -1367,7 +1367,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1763"
                 />
                 <ellipse
@@ -1393,15 +1393,15 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1769"
                 />
                 <g id="g1819">
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1773"
                     >
@@ -1411,9 +1411,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1777"
                     >
@@ -1423,9 +1423,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1781"
                     >
@@ -1435,9 +1435,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1785"
                     >
@@ -1447,9 +1447,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1789"
                     >
@@ -1459,9 +1459,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1793"
                     >
@@ -1471,9 +1471,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1797"
                     >
@@ -1483,9 +1483,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1801"
                     >
@@ -1495,9 +1495,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1805"
                     >
@@ -1507,9 +1507,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1809"
                     >
@@ -1519,9 +1519,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1813"
                     >
@@ -1531,9 +1531,9 @@ const TrackMap: React.FC<{
                     </text>
                     <text
                         xmlSpace="preserve"
-                        font-family="Liberation Sans Narrow"
-                        font-weight="bold"
-                        font-size="8.00"
+                        fontFamily="Liberation Sans Narrow"
+                        fontWeight="bold"
+                        fontSize="8.00"
                         fill="#FFFFFF"
                         id="text1817"
                     >
@@ -1549,7 +1549,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#0000FF"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1821"
                 />
                 <ellipse
@@ -1595,7 +1595,7 @@ const TrackMap: React.FC<{
                         d="M 204.50 221.50 L 198.50 221.50 L 193.50 215.50 L 198.50 187.50 L 204.50 187.50 L 210.50 215.50 Z M 210.50 221.50 "
                         fill="#4C4C4C"
                         stroke="#000000"
-                        stroke-width="1.00"
+                        strokeWidth="1.00"
                         id="path1831"
                     />
                 </g>
@@ -1632,7 +1632,7 @@ const TrackMap: React.FC<{
                         d="M 286.00 294.50 L 280.00 294.50 L 275.00 288.50 L 280.00 260.50 L 286.00 260.50 L 292.00 288.50 Z M 292.00 294.50 "
                         fill="#4C4C4C"
                         stroke="#000000"
-                        stroke-width="1.00"
+                        strokeWidth="1.00"
                         id="path1841"
                     />
                 </g>
@@ -1653,7 +1653,7 @@ const TrackMap: React.FC<{
                     ry="28.00"
                     fill="#FFFF00"
                     stroke="#000000"
-                    stroke-width="2.43"
+                    strokeWidth="2.43"
                     id="ellipse1847"
                 />
                 <ellipse
@@ -1679,7 +1679,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#000000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1853"
                 />
                 <ellipse
@@ -1689,7 +1689,7 @@ const TrackMap: React.FC<{
                     ry="8.50"
                     fill="#FF0000"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     id="ellipse1855"
                 />
                 <g id="g1867">
@@ -1708,7 +1708,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1859"
                     />
                     <ellipse
@@ -1718,7 +1718,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1861"
                     />
                     <path
@@ -1736,7 +1736,7 @@ const TrackMap: React.FC<{
                         y="323.50"
                         fill="#FF0000"
                         stroke="#000000"
-                        stroke-width="0.49"
+                        strokeWidth="0.49"
                         id="rect1865"
                     />
                 </g>
@@ -1756,7 +1756,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1871"
                     />
                     <ellipse
@@ -1766,7 +1766,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1873"
                     />
                     <path
@@ -1784,7 +1784,7 @@ const TrackMap: React.FC<{
                         y="323.50"
                         fill="#FF0000"
                         stroke="#000000"
-                        stroke-width="0.49"
+                        strokeWidth="0.49"
                         id="rect1877"
                     />
                 </g>
@@ -1804,7 +1804,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#000000"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1883"
                     />
                     <ellipse
@@ -1814,7 +1814,7 @@ const TrackMap: React.FC<{
                         ry="8.50"
                         fill="#FFFFFF"
                         stroke="#000000"
-                        stroke-width="2.00"
+                        strokeWidth="2.00"
                         id="ellipse1885"
                     />
                     <path
@@ -1832,7 +1832,7 @@ const TrackMap: React.FC<{
                         y="329.50"
                         fill="#FF0000"
                         stroke="#000000"
-                        stroke-width="0.49"
+                        strokeWidth="0.49"
                         id="rect1889"
                     />
                 </g>
@@ -1845,7 +1845,7 @@ const TrackMap: React.FC<{
                     d="M 135.89 92.81 C 135.68 91.31 136.74 89.93 138.24 89.73 L 138.24 89.73 C 139.75 89.53 141.13 90.58 141.34 92.09 L 145.49 122.47 C 145.69 123.98 144.64 125.36 143.13 125.56 L 143.13 125.56 C 141.63 125.76 140.24 124.70 140.04 123.20 Z M 135.89 92.81 "
                     fill="url(#def17)"
                     stroke="#000000"
-                    stroke-width="0.25"
+                    strokeWidth="0.25"
                     id="path1895"
                 />
                 <ellipse
@@ -1855,7 +1855,7 @@ const TrackMap: React.FC<{
                     ry="2.71"
                     fill="url(#def18)"
                     stroke="#000000"
-                    stroke-width="0.27"
+                    strokeWidth="0.27"
                     id="ellipse1897"
                 />
                 <path
@@ -1867,7 +1867,7 @@ const TrackMap: React.FC<{
                     d="M 430.97 92.81 C 431.18 91.31 430.13 89.93 428.62 89.73 L 428.62 89.73 C 427.12 89.53 425.73 90.58 425.52 92.09 L 421.38 122.47 C 421.17 123.98 422.22 125.36 423.73 125.56 L 423.73 125.56 C 425.23 125.76 426.62 124.70 426.83 123.20 Z M 430.97 92.81 "
                     fill="url(#def19)"
                     stroke="#000000"
-                    stroke-width="0.25"
+                    strokeWidth="0.25"
                     id="path1901"
                 />
                 <ellipse
@@ -1877,7 +1877,7 @@ const TrackMap: React.FC<{
                     ry="2.71"
                     fill="url(#def20)"
                     stroke="#000000"
-                    stroke-width="0.27"
+                    strokeWidth="0.27"
                     id="ellipse1903"
                 />
                 <path
@@ -1917,9 +1917,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1921"
                 >
@@ -1929,9 +1929,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1925"
                 >
@@ -1941,9 +1941,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="11.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="11.00"
                     fill="#FFFFFF"
                     id="text1929"
                 >
@@ -1953,9 +1953,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1933"
                 >
@@ -1965,9 +1965,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1937"
                 >
@@ -1986,7 +1986,7 @@ const TrackMap: React.FC<{
                     rx="8.50"
                     ry="8.50"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     fill="none"
                     id="ellipse1941"
                 />
@@ -2001,7 +2001,7 @@ const TrackMap: React.FC<{
                     rx="8.50"
                     ry="8.50"
                     stroke="#000000"
-                    stroke-width="2.00"
+                    strokeWidth="2.00"
                     fill="none"
                     id="ellipse1945"
                 />
@@ -2012,9 +2012,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1951"
                 >
@@ -2024,9 +2024,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1955"
                 >
@@ -2036,9 +2036,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1959"
                 >
@@ -2048,9 +2048,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1963"
                 >
@@ -2060,9 +2060,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1967"
                 >
@@ -2072,9 +2072,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1971"
                 >
@@ -2084,9 +2084,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1975"
                 >
@@ -2096,9 +2096,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1979"
                 >
@@ -2119,15 +2119,15 @@ const TrackMap: React.FC<{
                         d="M 328.50 147.50 L 322.50 147.50 L 317.50 141.50 L 322.50 113.50 L 328.50 113.50 L 334.50 141.50 Z M 334.50 147.50 "
                         fill="#4C4C4C"
                         stroke="#000000"
-                        stroke-width="1.00"
+                        strokeWidth="1.00"
                         id="path1983"
                     />
                 </g>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1989"
                 >
@@ -2137,9 +2137,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text1993"
                 >
@@ -2160,15 +2160,15 @@ const TrackMap: React.FC<{
                         d="M 243.50 147.50 L 237.50 147.50 L 232.50 141.50 L 237.50 113.50 L 243.50 113.50 L 249.50 141.50 Z M 249.50 147.50 "
                         fill="#4C4C4C"
                         stroke="#000000"
-                        stroke-width="1.00"
+                        strokeWidth="1.00"
                         id="path1997"
                     />
                 </g>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FFFFFF"
                     id="text2003"
                 >
@@ -2178,9 +2178,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FFFFFF"
                     id="text2007"
                 >
@@ -2190,9 +2190,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FFFFFF"
                     id="text2011"
                 >
@@ -2202,9 +2202,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#000000"
                     id="text2015"
                 >
@@ -2214,9 +2214,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#000000"
                     id="text2019"
                 >
@@ -2231,9 +2231,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FF0000"
                     id="text2025"
                 >
@@ -2243,9 +2243,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FF0000"
                     id="text2029"
                 >
@@ -2255,9 +2255,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#00E271"
                     id="text2033"
                 >
@@ -2267,9 +2267,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#000000"
                     id="text2037"
                 >
@@ -2279,9 +2279,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FF0000"
                     id="text2041"
                 >
@@ -2291,9 +2291,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#FF0000"
                     id="text2045"
                 >
@@ -2303,9 +2303,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="12.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="12.00"
                     fill="#000080"
                     id="text2049"
                 >
@@ -2315,9 +2315,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FF0000"
                     id="text2053"
                 >
@@ -2327,9 +2327,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2057"
                 >
@@ -2339,9 +2339,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2061"
                 >
@@ -2351,9 +2351,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2065"
                 >
@@ -2363,9 +2363,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2069"
                 >
@@ -2386,15 +2386,15 @@ const TrackMap: React.FC<{
                         d="M 368.50 221.50 L 362.50 221.50 L 357.50 215.50 L 362.50 187.50 L 368.50 187.50 L 374.50 215.50 Z M 374.50 221.50 "
                         fill="#4C4C4C"
                         stroke="#000000"
-                        stroke-width="1.00"
+                        strokeWidth="1.00"
                         id="path2073"
                     />
                 </g>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2079"
                 >
@@ -2404,9 +2404,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2083"
                 >
@@ -2416,9 +2416,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2087"
                 >
@@ -2428,9 +2428,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2091"
                 >
@@ -2440,9 +2440,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2095"
                 >
@@ -2452,9 +2452,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2099"
                 >
@@ -2464,9 +2464,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2103"
                 >
@@ -2476,9 +2476,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2107"
                 >
@@ -2488,9 +2488,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#000000"
                     id="text2111"
                 >
@@ -2500,9 +2500,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2115"
                 >
@@ -2517,9 +2517,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="9.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="9.00"
                     fill="#000000"
                     transform="matrix(0.99007, -0.140578, 0.140578, 0.99007, 0, 0)"
                     id="text2121"
@@ -2530,9 +2530,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="9.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="9.00"
                     fill="#000000"
                     transform="matrix(-0.99007, -0.140578, -0.140578, 0.99007, 0, 0)"
                     id="text2125"
@@ -2553,9 +2553,9 @@ const TrackMap: React.FC<{
                 />
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2133"
                 >
@@ -2565,9 +2565,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2137"
                 >
@@ -2577,9 +2577,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2141"
                 >
@@ -2589,9 +2589,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2145"
                 >
@@ -2601,9 +2601,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2149"
                 >
@@ -2613,9 +2613,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2153"
                 >
@@ -2625,9 +2625,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2157"
                 >
@@ -2637,9 +2637,9 @@ const TrackMap: React.FC<{
                 </text>
                 <text
                     xmlSpace="preserve"
-                    font-family="Liberation Sans Narrow"
-                    font-weight="bold"
-                    font-size="8.00"
+                    fontFamily="Liberation Sans Narrow"
+                    fontWeight="bold"
+                    fontSize="8.00"
                     fill="#FFFFFF"
                     id="text2161"
                 >
@@ -2651,7 +2651,7 @@ const TrackMap: React.FC<{
                     d="M 289.50 176.50 L 283.24 164.50 L 277.50 176.50 Z M 288.59 172.90 "
                     fill="#FFFFFF"
                     stroke="#000000"
-                    stroke-width="1.18"
+                    strokeWidth="1.18"
                     id="path2163"
                 />
                 <g id="g2175">
