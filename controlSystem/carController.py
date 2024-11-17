@@ -33,6 +33,7 @@ class CarController:
         self.logFile = open("log.csv", "w")
         self.logFile.write("Timestamp;Speed;DistanceFromCenter;TrackAngle;TrackDistance;WorldPosition;WorldRotation;Throttle;Brakes;Steering;Gear\n")
         self.manualControls = ManualControls()
+        self.firstRound = True
         
     
     def send_command(self, throttle, brakes, steering, reset):
@@ -81,22 +82,22 @@ class CarController:
         # Adjust steering
         offset = 0
         if speed > 20:
-            offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1, 40, 60, 20, -5, -5, offset) #Kurve 0
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 250, 290, 346, 0, 8, -25, offset) #Kurve 1
+            offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1, 40, 60, 20, -5, -25, offset) #Kurve 0
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 220, 290, 346, 0, 8, -22, offset) #Kurve 1
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 390, 421, 466, 5, 7, -5, offset) #Kurve 2
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 840, 877, 906, 0, 8, -25, offset) #Kurve 3
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 960, 1040, 1088, 0, 5, -10, offset) #Kurve 4
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1166, 1214, 1220, -8, 25, 25, offset) #Kurve 5
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1221, 1240, 1272, 15, 0, 0, offset) #Kurve 6
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 960, 1040, 1100, 5, 5, -15, offset) #Kurve 4
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1166, 1214, 1220, -15, 10, 15, offset) #Kurve 5
+        # offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1221, 1240, 1272, 15, 0, 0, offset) #Kurve 6
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1273, 1360, 1429, 5, 5, 5, offset) #Kurve 7
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1430, 1431, 1478, 5, 5, -10, offset) #Kurve 8
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1500, 1592, 1627, 3, -3, 5, offset) #Kurve 8.1
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1677, 1707, 1732, -3, 5, 0, offset) #Kurve 9
-        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1733, 1765, 1788, 0, 5, 0, offset) #Kurve 10
+        offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1733, 1765, 1788, 0, -5, 0, offset) #Kurve 10
         offset = self.piecewise_linear_interpolation(self.carData["TrackInfo"]["TrackDistance"], 1805, 1837, 1905, 0, -5, 5, offset) #Kurve 11
         
         #- nach links, + nach rechts
-        print("Offset:", offset)
+        # print("Offset:", offset)
         steering = self.steeringPid(k1*(distance_from_center + offset)+ k2*track_angle)
         steering = self.limitValue(steering, -100, 100)
         
@@ -137,7 +138,7 @@ class CarController:
             setPoint = self.setPointData[intCurrentTrackDistance - 1]
         throttle = int(setPoint["Throttle"])*scalingFactorAccelerate
         brakes = int(setPoint["Brakes"])*(1-scalingFactorBrake)
-        print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]))
+        # print("Throttle:", int(throttle), "Brakes:", int(brakes), "Current Position:", intCurrentTrackDistance, "Gear:", self.carData["CurrentGear"], "Speed:", int(self.carData["CurrentSpeed"]))
         return throttle, brakes
         
     def gearShifter(self):
@@ -226,7 +227,7 @@ class CarController:
         return self.manualControls.throttle, self.manualControls.brakes, self.manualControls.steering, self.manualControls.reset
         
     def printLastandFastestLap(self):
-        if 0< self.carData["TrackInfo"]["TrackDistance"] < 50:
+        if 0 < self.carData["TrackInfo"]["TrackDistance"] < 50:
             try:  
                 print("Fastest Lap: ", self.carData["FastestLap"])
                 print("LastLap:", self.carData["LastLap"])
@@ -234,8 +235,7 @@ class CarController:
                 pass
     
     def overrideFirstMeters(self):
-        firstRound = True
-        while self.carData["TrackInfo"]["TrackDistance"] < 50 and firstRound:
+        while (self.carData["TrackInfo"]["TrackDistance"] < 40 or self.carData["TrackInfo"]["TrackDistance"] >1900 )and self.firstRound:
             self.gearShifter()
             self.carCommand = {
                 "Throttle": 100
@@ -243,8 +243,18 @@ class CarController:
             message = json.dumps(self.carCommand).encode()
             self.socket.send(message)
             self.receive_data()
-        firstRound = False
-        
+        self.firstRound = False
+
+    def doPitStop(self):
+        if self.carData["CarInfo"]["BrakeWear"] > 80 or self.carData["CarInfo"]["TireWear"] > 10:
+            print("Pitstop necessary")
+            if self.carData["TrackInfo"]["TrackDistance"] > 1800:
+                print("Pitstop started")
+                self.socket.send(b'{"Throttle": "0", "Brakes": "100"}')
+                self.receive_data()
+                time.sleep(4)
+                print("Pitstop done")
+                
 
             
     def control_loop(self):
@@ -252,7 +262,6 @@ class CarController:
         self.receive_data()
         self.socket.send(b'{"Reset": "True"}')
         self.receive_data()
-        
         self.setPointData = helper.readCSVLogFile("workFile.csv")
 
         while True:
@@ -261,6 +270,7 @@ class CarController:
             self.gearShifter()
             self.overrideFirstMeters()
             self.printLastandFastestLap()
+            self.doPitStop()
             self.send_command(throttle, brakes, steering, reset)
             self.receive_data()
             self.recordRunToFile()
